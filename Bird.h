@@ -6,12 +6,12 @@
 #include <bits/stdc++.h>
 
 class Bird{
-
-public:
+private:
     sf::Texture t;
     sf::Sprite s;
-    int x;
+public:
     Bird();
+    sf::Sprite get_sprite(){return s;};
 
 };
 
