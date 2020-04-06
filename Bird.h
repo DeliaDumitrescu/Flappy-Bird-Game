@@ -6,22 +6,21 @@
 #include <bits/stdc++.h>
 
 class Bird{
+
 private:
     sf::Texture t;
     sf::Sprite s;
     bool alive;
-    float dy;
-    int score;
-    float x, y;
-    int angle;
+    float x, y, dy;
+    int score, angle;
+
 public:
     Bird();
     sf::Sprite get_sprite() const {return s;};
+    void jump();
     void fall();
     void draw(sf::RenderWindow&);
     void reset();
-    void jump();
-
 };
 
 
