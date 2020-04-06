@@ -45,5 +45,4 @@ void Bird::reset()
     alive = 1;
     score = 0;
     angle = 0;
-
 }
