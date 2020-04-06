@@ -8,7 +8,7 @@ Pipe::Pipe()
     s_down.setTexture(t_down); /*s_up.setOrigin(0, y);*/ s_down.setPosition(x, 1000 - y);
 };
 
-void Pipe::draw(sf::RenderWindow& window)
+void Pipe::draw(sf::RenderWindow &window)
 {
     s_up.setOrigin(0, y); s_up.setPosition(x, 0); 
     s_down.setPosition(x, 1000 - y);

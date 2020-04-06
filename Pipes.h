@@ -14,6 +14,7 @@ public:
 	int getX() { return x; }
 	void setX(int val) { x = val; }
 	void draw(sf::RenderWindow&);
+	void move() { x--; }
 };
 
 #endif PIPES_H

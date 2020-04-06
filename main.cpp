@@ -5,12 +5,14 @@
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(1000, 800), "Flappy Bird");
+    window.setFramerateLimit(360);
+
     sf::Texture t; t.loadFromFile("Images\\background.png"); sf::Sprite background(t);
 
     Bird bird;
     Pipe first, second, third;
-    second.setX(first.getX() + 400);
-    third.setX(first.getX() + 800);
+    second.setX(first.getX() + 500);
+    third.setX(first.getX() + 1000);
 
     while (window.isOpen())
     {
@@ -30,6 +32,7 @@ int main()
                 window.close();
 
         }
+        for (auto i : { &first,&second,&third }) i->move();
     }
 
 
