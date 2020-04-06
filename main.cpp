@@ -1,16 +1,23 @@
 #include <SFML/Graphics.hpp>
 #include "Bird.h"
+#include "Pipes.h"
+
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(1000, 800), "Flappy Bird");
-    sf::Texture t; t.loadFromFile("background.png"); sf::Sprite background(t);
+    sf::Texture t; t.loadFromFile("Images\\background.png"); sf::Sprite background(t);
+
+    Bird bird;
+    Pipe first, second, third;
+    second.setX(first.getX() + 400);
+    third.setX(first.getX() + 800);
 
     while (window.isOpen())
     {
         window.clear();
         window.draw(background);
-
-        Bird bird;
+        for (auto i : { &first,&second,&third }) i->draw(window);
+ 
         window.draw(bird.get_sprite());
         window.display();
 
@@ -18,7 +25,7 @@ int main()
         sf::Event event;
         while (window.pollEvent(event))
         {
-                    // "close requested" event: we close the window
+            // "close requested" event: we close the window
             if (event.type == sf::Event::Closed)
                 window.close();
 
