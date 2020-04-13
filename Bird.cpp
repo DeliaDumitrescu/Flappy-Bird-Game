@@ -18,15 +18,17 @@ Bird::Bird()
 
 void Bird::fall()
 {
-    dy += 1;
+    dy += 0.1;
     y += dy;
-    angle = 30;
+    if(dy<0)
+        angle = -30;
+    else
+        angle = 20;
 }
 
 void Bird::jump()
 {
-    dy += 1;
-    y -= dy;
+    dy = -4;
     angle = -30;
 }
 
