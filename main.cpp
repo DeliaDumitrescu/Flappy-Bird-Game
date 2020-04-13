@@ -14,13 +14,28 @@ int main()
     sf::Sprite background(t);
 
     sf::Text gameOver;
-    sf::Font f;
-    f.loadFromFile("fonts//Flappy-Bird.ttf");
-    gameOver.setFont(f);
+    sf::Font f1;
+    f1.loadFromFile("fonts//Flappy-Bird.ttf");
+    gameOver.setFont(f1);
     gameOver.setPosition(140, 300);
     gameOver.setOutlineThickness(3);
     gameOver.setCharacterSize(60);
     gameOver.setString("Game Over! Press R for RESTART.");
+
+    sf::Text startText;
+    sf::Font f2;
+    f2.loadFromFile("fonts//Flappy-Bird.ttf");
+    startText.setFont(f2);
+    startText.setPosition(300, 300);
+    startText.setOutlineThickness(3);
+    startText.setCharacterSize(60);
+    startText.setString("Left click to start!.");
+
+    sf::SoundBuffer buffer_g_o;
+    buffer_g_o.loadFromFile("sounds//game_over.wav");
+    sf::Sound game_over_sound;
+    game_over_sound.setBuffer(buffer_g_o);
+    bool g_o_sound_played = 0;
 
     Bird bird;
     Pipe first, second, third;
@@ -44,7 +59,8 @@ int main()
         bird.draw(window);
         for (auto i : { &first,&second,&third }) i->draw(window);
         score.draw(window);
-        // check all the window's events that were triggered since the last iteration of the loop
+        if (!started) window.draw(startText);
+        
         sf::Event event;
         while (window.pollEvent(event))
         {
@@ -52,7 +68,7 @@ int main()
                 window.close();
 
             if(event.type == sf::Event::MouseButtonPressed)
-                if (event.mouseButton.button == sf::Mouse::Left)
+                if (event.mouseButton.button == sf::Mouse::Left && bird.isAlive())
                 {
                     started = 1;
                     bird.jump();
@@ -66,6 +82,7 @@ int main()
                     bird.reset(); //default
                     started = 0;
                     score.resetValue();
+                    g_o_sound_played = 0;
                 }
             }
         }
@@ -84,8 +101,8 @@ int main()
         else
         {
             window.draw(gameOver);
+            if(!g_o_sound_played) game_over_sound.play(), g_o_sound_played = 1;
         }
-
         window.display();
     }
 

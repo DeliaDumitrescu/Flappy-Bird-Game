@@ -9,6 +9,8 @@ class Bird
 private:
     sf::Texture t;
     sf::Sprite s;
+    sf::SoundBuffer buffer;
+    sf::Sound flap_sound;
     bool alive;
     float x, y, dy;
     int angle;

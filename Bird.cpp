@@ -4,6 +4,8 @@ Bird::Bird()
 {
     t.loadFromFile("images//bird.png");
     s.setTexture(t);
+    buffer.loadFromFile("sounds//flap.wav"); 
+    flap_sound.setBuffer(buffer);
     x = 120;
     y = 500;
     s.setPosition(x, y);
@@ -27,6 +29,7 @@ void Bird::jump()
 {
     dy = -4;
     angle = -30;
+    flap_sound.play();
 }
 
 void Bird::draw(sf::RenderWindow& w)

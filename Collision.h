@@ -2,6 +2,7 @@
 #define COLLISION_H
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include "Bird.h"
 #include "Pipes.h"
 #include "Score.h"
@@ -11,9 +12,14 @@ class Collision
 	Bird &bird;
 	Pipe &first, &second, &third;
 	Score &score;
+	sf::SoundBuffer buffer;
+	sf::Sound coin_sound;
 	int first_pipe_x, first_pipe_y;
 public:
-	Collision(Bird &b, Pipe &p1, Pipe &p2, Pipe &p3, Score &s) : bird(b), first(p1), second(p2), third(p3), score(s) {}
+	Collision(Bird &b, Pipe &p1, Pipe &p2, Pipe &p3, Score &s) : bird(b), first(p1), second(p2), third(p3), score(s) {
+		buffer.loadFromFile("sounds//coin.wav");
+		coin_sound.setBuffer(buffer);
+	}
 	void isCollide();
 	void update();
 };
