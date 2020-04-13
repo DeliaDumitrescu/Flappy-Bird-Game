@@ -12,7 +12,7 @@ private:
     sf::Sprite s;
     bool alive;
     float x, y, dy;
-    int score, angle;
+    int angle;
 
 public:
     Bird();

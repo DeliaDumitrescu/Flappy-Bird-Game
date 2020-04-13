@@ -11,7 +11,6 @@ Bird::Bird()
     s.setPosition(x, y);
     s.setOrigin(30, 22);
     alive = 1;
-    score = 0;
     dy = 0;
     angle = 0;
 }
