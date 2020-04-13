@@ -12,8 +12,10 @@ class Pipe
 
 public:
     Pipe();
-    int getX() { return x; }
+    int getX() const { return x; }
+    int getY() const { return y; }
     void setX(int val) { x = val; }
+    void setY(int val) { y = val; }
     void draw(sf::RenderWindow&);
     void move() { x--; }
 };

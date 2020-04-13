@@ -3,10 +3,9 @@
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
-#include <bits/stdc++.h>
 
-class Bird{
-
+class Bird
+{
 private:
     sf::Texture t;
     sf::Sprite s;
@@ -21,8 +20,10 @@ public:
     void fall();
     void draw(sf::RenderWindow&);
     void reset();
+    int getX() const { return x; }
+    int getY() const { return y; }
+    void die() { alive = 0; }
+    bool isAlive() const { return alive; }
 };
-
-
 
 #endif // BIRD_H

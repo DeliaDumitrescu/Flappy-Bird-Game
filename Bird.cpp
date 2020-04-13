@@ -1,10 +1,8 @@
 #include "Bird.h"
-#include <bits/stdc++.h>
-
 
 Bird::Bird()
 {
-    t.loadFromFile("Images//bird.png");
+    t.loadFromFile("images//bird.png");
     s.setTexture(t);
     x = 120;
     y = 500;
@@ -44,6 +42,5 @@ void Bird::reset()
     y = 500;
     dy = 0;
     alive = 1;
-    score = 0;
     angle = 0;
 }

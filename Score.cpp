@@ -1,14 +1,18 @@
 #include "Score.h"
-#include <bits/stdc++.h>
 
 
 Score::Score()
 {
-    font.loadFromFile("Flappy-Bird.ttf");
-    s.setFont(font);
     value = 0;
+    font.loadFromFile("fonts//Flappy-Bird.ttf");
+    s.setFont(font);
     s.setPosition(10, 0);
     s.setOutlineThickness(3);
     s.setCharacterSize(60);
+}
+
+void Score::draw(sf::RenderWindow& w)
+{
     s.setString(std::to_string(value));
+    w.draw(s);
 }

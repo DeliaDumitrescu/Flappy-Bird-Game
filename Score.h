@@ -3,19 +3,18 @@
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
-#include <bits/stdc++.h>
 
-
-
-class Score{
+class Score {
 private:
     sf::Text s;
     sf::Font font;
     int value;
 public:
     Score();
-    sf::Text getS(){return s;}
-    int getValue(){return value;}
+    sf::Text getS() { return s; }
+    void draw(sf::RenderWindow&);
+    int getValue() { return value; }
+    void updateValue() { value++; }
 };
 
 

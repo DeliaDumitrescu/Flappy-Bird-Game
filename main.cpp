@@ -1,8 +1,8 @@
 #include <SFML/Graphics.hpp>
 #include "Bird.h"
 #include "Pipes.h"
+#include "Collision.h"
 #include "Score.h"
-#include <bits/stdc++.h>
 
 int main()
 {
@@ -10,7 +10,7 @@ int main()
     window.setFramerateLimit(360);
 
     sf::Texture t;
-    t.loadFromFile("Images//background.png");
+    t.loadFromFile("images//background.png");
     sf::Sprite background(t);
 
     Bird bird;
@@ -18,22 +18,22 @@ int main()
     second.setX(first.getX() + 500);
     third.setX(first.getX() + 1000);
 
-    Score score;
-
     sf::Clock delay;
-    //int frame_counter = 0; float fps_counter; sf::Clock delay;
+
+    Score score;
+    Collision objects(bird, first, second, third, score);
 
     while (window.isOpen())
     {
+        objects.isCollide();
+        objects.update();
+        if (bird.getY() > 700) bird.die();
+
         window.clear();
         window.draw(background);
-
-        //score.s.setString(std::to_string(score.value));
-        window.draw(score.getS());
-
         bird.draw(window);
         for (auto i : { &first,&second,&third }) i->draw(window);
-
+        score.draw(window);
         // check all the window's events that were triggered since the last iteration of the loop
         sf::Event event;
         while (window.pollEvent(event))
@@ -57,14 +57,15 @@ int main()
             }
         }
 
-        if (delay.getElapsedTime().asSeconds() > 0.005) //  1/0.005 = 200 fps for the bird
+        if (bird.isAlive())
+        {
+            if (delay.getElapsedTime().asSeconds() > 0.005) //  1/0.005 = 200 fps for the bird
             {
                 bird.fall(); //updates bird position
                 delay.restart();
             }
-
-
-        for (auto i : { &first,&second,&third }) i->move();
+            for (auto i : { &first,&second,&third }) i->move();
+        }
 
         window.display();
     }
