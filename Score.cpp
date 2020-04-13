@@ -1,6 +1,5 @@
 #include "Score.h"
 
-
 Score::Score()
 {
     value = 0;
@@ -11,8 +10,14 @@ Score::Score()
     s.setCharacterSize(60);
 }
 
+void Score::resetValue()
+{
+    value = 0;
+}
+
 void Score::draw(sf::RenderWindow& w)
 {
     s.setString(std::to_string(value));
     w.draw(s);
 }
+

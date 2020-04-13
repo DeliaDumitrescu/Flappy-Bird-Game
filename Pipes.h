@@ -5,8 +5,8 @@
 
 class Pipe
 {
-    int x = 600;
-    int y = rand() % 400 + 350;
+    int x, y;
+    static int reset_x;
     sf::Texture t_up, t_down;
     sf::Sprite s_up, s_down;
 
@@ -18,6 +18,7 @@ public:
     void setY(int val) { y = val; }
     void draw(sf::RenderWindow&);
     void move() { x--; }
+    void reset();
 };
 
 #endif //PIPES_H

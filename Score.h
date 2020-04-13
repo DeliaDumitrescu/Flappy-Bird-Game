@@ -15,8 +15,8 @@ public:
     void draw(sf::RenderWindow&);
     int getValue() { return value; }
     void updateValue() { value++; }
+    void resetValue();
 };
-
 
 
 #endif // SCORE_H

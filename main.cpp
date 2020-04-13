@@ -13,14 +13,24 @@ int main()
     t.loadFromFile("images//background.png");
     sf::Sprite background(t);
 
+    sf::Text gameOver;
+    sf::Font f;
+    f.loadFromFile("fonts//Flappy-Bird.ttf");
+    gameOver.setFont(f);
+    gameOver.setPosition(140, 300);
+    gameOver.setOutlineThickness(3);
+    gameOver.setCharacterSize(60);
+    gameOver.setString("Game Over! Press R for RESTART.");
+
     Bird bird;
     Pipe first, second, third;
     second.setX(first.getX() + 500);
     third.setX(first.getX() + 1000);
+    Score score;
 
     sf::Clock delay;
+    bool started = 0;
 
-    Score score;
     Collision objects(bird, first, second, third, score);
 
     while (window.isOpen())
@@ -44,6 +54,7 @@ int main()
             if(event.type == sf::Event::MouseButtonPressed)
                 if (event.mouseButton.button == sf::Mouse::Left)
                 {
+                    started = 1;
                     bird.jump();
                     bird.draw(window);
                 }
@@ -51,20 +62,28 @@ int main()
             {
                 if (event.key.code == sf::Keyboard::R)
                 {
-                    //for (auto i : { &first,&second,&third }) i->reset();
+                    for (auto i : { &first,&second,&third }) i->reset();
                     bird.reset(); //default
+                    started = 0;
+                    score.resetValue();
                 }
             }
         }
 
         if (bird.isAlive())
         {
-            if (delay.getElapsedTime().asSeconds() > 0.005) //  1/0.005 = 200 fps for the bird
-            {
-                bird.fall(); //updates bird position
-                delay.restart();
-            }
+            if(started)
+            {   if (delay.getElapsedTime().asSeconds() > 0.005) //  1/0.005 = 200 fps for the bird
+                {
+                    bird.fall(); //updates bird position
+                    delay.restart();
+                }
             for (auto i : { &first,&second,&third }) i->move();
+            }
+        }
+        else
+        {
+            window.draw(gameOver);
         }
 
         window.display();
