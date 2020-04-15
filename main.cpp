@@ -3,33 +3,22 @@
 #include "Pipes.h"
 #include "Collision.h"
 #include "Score.h"
+#include "Text.h"
 
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(1000, 800), "Flappy Bird");
     window.setFramerateLimit(360);
+    sf::Clock delay;
+    bool started = 0;
 
     sf::Texture t;
     t.loadFromFile("images//background.png");
     sf::Sprite background(t);
 
-    sf::Text gameOver;
-    sf::Font f1;
-    f1.loadFromFile("fonts//Flappy-Bird.ttf");
-    gameOver.setFont(f1);
-    gameOver.setPosition(140, 300);
-    gameOver.setOutlineThickness(3);
-    gameOver.setCharacterSize(60);
-    gameOver.setString("Game Over! Press R for RESTART.");
+    Text gameOverText(140, 300, 3, 60, "Game Over! Press R for RESTART.", "fonts//Flappy-Bird.ttf" );
+    Text startText(300, 300, 3, 60, "Left click to start!.","fonts//Flappy-Bird.ttf" );
 
-    sf::Text startText;
-    sf::Font f2;
-    f2.loadFromFile("fonts//Flappy-Bird.ttf");
-    startText.setFont(f2);
-    startText.setPosition(300, 300);
-    startText.setOutlineThickness(3);
-    startText.setCharacterSize(60);
-    startText.setString("Left click to start!.");
 
     sf::SoundBuffer buffer_g_o;
     buffer_g_o.loadFromFile("sounds//game_over.wav");
@@ -41,10 +30,9 @@ int main()
     Pipe first, second, third;
     second.setX(first.getX() + 500);
     third.setX(first.getX() + 1000);
+
     Score score;
 
-    sf::Clock delay;
-    bool started = 0;
 
     Collision objects(bird, first, second, third, score);
 
@@ -59,8 +47,8 @@ int main()
         bird.draw(window);
         for (auto i : { &first,&second,&third }) i->draw(window);
         score.draw(window);
-        if (!started) window.draw(startText);
-        
+        if (!started) startText.draw(window);
+
         sf::Event event;
         while (window.pollEvent(event))
         {
@@ -100,7 +88,7 @@ int main()
         }
         else
         {
-            window.draw(gameOver);
+            gameOverText.draw(window);
             if(!g_o_sound_played) game_over_sound.play(), g_o_sound_played = 1;
         }
         window.display();
