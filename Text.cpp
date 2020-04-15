@@ -16,7 +16,6 @@ Text::Text(int positionXX, int positionYY, int thicknesss, int sizee, std::strin
     t.setOutlineThickness(thickness);
     t.setCharacterSize(size);
     t.setString(s);
-
 }
 
 void Text::draw(sf::RenderWindow& w)

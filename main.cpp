@@ -12,29 +12,25 @@ int main()
     sf::Clock delay;
     bool started = 0;
 
-    sf::Texture t;
+    sf::Texture t;                            //background
     t.loadFromFile("images//background.png");
     sf::Sprite background(t);
 
-    Text gameOverText(140, 300, 3, 60, "Game Over! Press R for RESTART.", "fonts//Flappy-Bird.ttf" );
+    Text gameOverText(140, 300, 3, 60, "Game Over! Press R for RESTART.", "fonts//Flappy-Bird.ttf" );  //text
     Text startText(300, 300, 3, 60, "Left click to start!.","fonts//Flappy-Bird.ttf" );
 
-
-    sf::SoundBuffer buffer_g_o;
+    sf::SoundBuffer buffer_g_o;              //sunete
     buffer_g_o.loadFromFile("sounds//game_over.wav");
     sf::Sound game_over_sound;
     game_over_sound.setBuffer(buffer_g_o);
     bool g_o_sound_played = 0;
 
-    Bird bird;
+    Bird bird;                                   //pasare, obstacole, collision
     Pipe first, second, third;
     second.setX(first.getX() + 500);
     third.setX(first.getX() + 1000);
-
-    Score score;
-
-
     Collision objects(bird, first, second, third, score);
+    Score score;
 
     while (window.isOpen())
     {
@@ -63,7 +59,6 @@ int main()
                     bird.draw(window);
                 }
             if (event.type == sf::Event::KeyPressed)
-            {
                 if (event.key.code == sf::Keyboard::R)
                 {
                     for (auto i : { &first,&second,&third }) i->reset();
@@ -72,15 +67,14 @@ int main()
                     score.resetValue();
                     g_o_sound_played = 0;
                 }
-            }
         }
 
         if (bird.isAlive())
         {
             if(started)
-            {   if (delay.getElapsedTime().asSeconds() > 0.005) //  1/0.005 = 200 fps for the bird
+            {   if (delay.getElapsedTime().asSeconds() > 0.005)
                 {
-                    bird.fall(); //updates bird position
+                    bird.fall();
                     delay.restart();
                 }
             for (auto i : { &first,&second,&third }) i->move();
@@ -93,7 +87,6 @@ int main()
         }
         window.display();
     }
-
 
     return 0;
 }

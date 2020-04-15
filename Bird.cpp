@@ -4,7 +4,7 @@ Bird::Bird()
 {
     t.loadFromFile("images//bird.png");
     s.setTexture(t);
-    buffer.loadFromFile("sounds//flap.wav"); 
+    buffer.loadFromFile("sounds//flap.wav");
     flap_sound.setBuffer(buffer);
     x = 120;
     y = 500;

@@ -1,10 +1,10 @@
 #ifndef PIPES_H
 #define PIPES_H
-
 #include <SFML/Graphics.hpp>
 
 class Pipe
 {
+private:
     int x, y;
     static int reset_x;
     sf::Texture t_up, t_down;

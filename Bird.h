@@ -1,6 +1,5 @@
 #ifndef BIRD_H
 #define BIRD_H
-
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 
