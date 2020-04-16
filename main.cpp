@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+#include <bits/stdc++.h>
 #include "Bird.h"
 #include "Pipes.h"
 #include "Collision.h"
@@ -41,7 +42,12 @@ int main()
     {
         objects.isCollide();
         objects.update();
-        if (bird.getY() > 700) bird.die();
+        if (bird.getY() > 700)
+        {
+            if(bird.isAlive())
+                score.insertScore();
+            bird.die();
+        }
 
         window.clear();
         window.draw(background);
@@ -92,6 +98,8 @@ int main()
         }
         window.display();
     }
+
+    //score.print();
 
     return 0;
 }
