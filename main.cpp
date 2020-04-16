@@ -24,13 +24,18 @@ int main()
     sf::Sound game_over_sound;
     game_over_sound.setBuffer(buffer_g_o);
     bool g_o_sound_played = 0;
+                               //pasare, obstacole, collision
+    Bird bird;
 
-    Bird bird;                                   //pasare, obstacole, collision
-    Pipe first, second, third;
-    second.setX(first.getX() + 500);
-    third.setX(first.getX() + 1000);
-    Collision objects(bird, first, second, third, score);
+    Pipe first(600, "images//Pipe_up.png", "images//Pipe_down.png");
+    Pipe second;
+    second = first + 500;
+    Pipe third(first);
+    third += 1000;
+
     Score score;
+
+    Collision objects(bird, first, second, third, score);
 
     while (window.isOpen())
     {

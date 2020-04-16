@@ -1,19 +1,28 @@
 #include "Bird.h"
 
-Bird::Bird()
-{
-    t.loadFromFile("images//bird.png");
-    s.setTexture(t);
-    buffer.loadFromFile("sounds//flap.wav");
-    flap_sound.setBuffer(buffer);
-    x = 120;
-    y = 500;
-    s.setPosition(x, y);
-    s.setOrigin(30, 22);
-    alive = 1;
-    dy = 0;
-    angle = 0;
-}
+ Bird::Bird(int val_alive, int val_x, int val_y, int val_dy, int val_angle, std::string val_fileBird, std::string val_fileSound)
+ {
+    alive = val_alive;
+    x = val_x;
+    y = val_y;
+    dy = val_dy;
+    angle = val_angle;
+    fileBird = val_fileBird;
+    fileSound = val_fileSound;
+    if(fileBird != "")
+    {
+        t.loadFromFile(fileBird);
+        s.setTexture(t);
+        s.setPosition(x, y);
+        s.setOrigin(30, 22);
+    }
+    if(fileSound != "")
+    {
+        buffer.loadFromFile(fileSound);
+        flap_sound.setBuffer(buffer);
+    }
+ }
+
 
 void Bird::fall()
 {

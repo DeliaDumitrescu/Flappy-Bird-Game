@@ -12,7 +12,7 @@ private:
     std::string fileName;
 
 public:
-    Text(int positionXX, int positionYY, int thicknesss, int sizee, std::string ss, std::string fileNamee);
+    Text(int positionXX = 0, int positionYY = 0, int thicknesss = 0, int sizee = 0, std::string ss = "", std::string fileNamee = "");
     void draw(sf::RenderWindow&);
 };
 
