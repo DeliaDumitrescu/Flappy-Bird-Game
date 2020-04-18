@@ -5,7 +5,7 @@ int Pipe::reset_x = 600;
 Pipe::Pipe(int val_x, std::string val_file_up, std::string val_file_down)
 {
     x = val_x;
-    y = random() % 400 + 350;
+    y = rand() % 400 + 350;
     file_up = val_file_up;
     file_down = val_file_down;
 

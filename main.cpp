@@ -1,5 +1,4 @@
 #include <SFML/Graphics.hpp>
-#include <bits/stdc++.h>
 #include "Bird.h"
 #include "Pipes.h"
 #include "Collision.h"
@@ -13,12 +12,12 @@ int main()
     sf::Clock delay;
     bool started = 0;
 
-    sf::Texture t;                            //background
+    sf::Texture t;                           
     t.loadFromFile("images//background.png");
     sf::Sprite background(t);
 
-    Text gameOverText(140, 300, 3, 60, "Game Over! Press R for RESTART.", "fonts//Flappy-Bird.ttf" );  //text
-    Text startText(300, 300, 3, 60, "Left click to start!.","fonts//Flappy-Bird.ttf" );
+    Text gameOverText(140, 300, 3, 50, "Game Over! Press R for RESTART", "fonts//arial.ttf" );  //text
+    Text startText(300, 300, 3, 60, "Left click to start!","fonts//arial.ttf" );
 
     sf::SoundBuffer buffer_g_o;              //sunete
     buffer_g_o.loadFromFile("sounds//game_over.wav");
@@ -42,10 +41,9 @@ int main()
     {
         objects.isCollide();
         objects.update();
-        if (bird.getY() > 700)
+        if (bird.getY() > 700 && bird.isAlive())
         {
-            if(bird.isAlive())
-                score.insertScore();
+            score.insertScore();
             bird.die();
         }
 
@@ -93,6 +91,10 @@ int main()
         }
         else
         {
+            Text scoreText(140, 80, 3, 60, "Score: " + std::to_string(score.getValue()), "fonts//arial.ttf");
+            scoreText.draw(window);
+            Text hsText(140, 150, 3, 60, "Highscore: " + std::to_string(score.getHS()), "fonts//arial.ttf");
+            hsText.draw(window);
             gameOverText.draw(window);
             if(!g_o_sound_played) game_over_sound.play(), g_o_sound_played = 1;
         }

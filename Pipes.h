@@ -1,5 +1,6 @@
 #ifndef PIPES_H
 #define PIPES_H
+
 #include <SFML/Graphics.hpp>
 
 class Pipe

@@ -1,5 +1,4 @@
 #include "Score.h"
-#include <bits/stdc++.h>
 
 Score::Score(int valuee, int positionXX, int positionYY, int thicknesss, int sizee, std::string fileNamee)
 {
@@ -57,20 +56,11 @@ Score& Score::operator ++ ()
 Score Score::operator ++ (int)
 {
     Score aux(*this);
-    operator ++();
+    ++(*this);
     return aux;
 }
 
 void Score::insertScore()
 {
     allScores.push(value);
-}
-
-void Score::print()
-{
-    while (!allScores.empty())
-        {
-            std::cout << allScores.top() << '\n';
-            allScores.pop();
-        }
 }

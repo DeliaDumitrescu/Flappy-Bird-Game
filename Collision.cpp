@@ -1,5 +1,4 @@
 #include "Collision.h"
-#include <bits/stdc++.h>
 
 void Collision::isCollide()
 {
@@ -16,9 +15,9 @@ void Collision::isCollide()
 		first_pipe_y = third.getY();
 	}
 	if (bird.getX() + 30 > first_pipe_x && (bird.getY() - 22 < 800 - first_pipe_y || bird.getY() + 22 > 1000 - first_pipe_y))
-		if(bird.isAlive())
-		{	bird.die();
+		if (bird.isAlive()) {
 			score.insertScore();
+			bird.die();
 		}
 }
 

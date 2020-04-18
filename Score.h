@@ -1,8 +1,9 @@
 #ifndef SCORE_H
 #define SCORE_H
+
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
-#include <bits/stdc++.h>
+#include <queue>
 
 class Score
 {
@@ -19,13 +20,13 @@ public:
     Score(const Score&);
     sf::Text getS() { return s; }
     void draw(sf::RenderWindow&);
-    int getValue() { return value; }
+    int getValue() const { return value; }
+    int getHS() const { return allScores.top(); }
     void updateValue() { value++; }
     void resetValue();
     Score& operator ++();
     Score operator ++(int);
     void insertScore();
-    //void print();
 };
 
 
