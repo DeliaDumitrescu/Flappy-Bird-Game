@@ -1,18 +1,28 @@
 #include "Text.h"
+#include <iostream>
+#include <filesystem>
 
-Text::Text(int positionXX, int positionYY, int thicknesss, int sizee, std::string ss, std::string fileNamee)
+Text::Text(int positionX, int positionY, int thicknesss, int sizee, std::string ss, std::string fileNamee)
 {
     fileName = fileNamee;
-    f.loadFromFile(fileNamee);
-    positionX = positionXX;
-    positionY = positionYY;
+    try {
+        if (std::filesystem::exists(fileName)) throw fileName;
+        else throw 0;
+    }
+    catch (std::string fisier) {
+        f.loadFromFile(fisier);
+    }
+    catch (bool nope) {
+        std::cout << "Nu am putut gasi fisierul " << fileName << '\n';
+    }
+    x = positionX;
+    y = positionY;
     thickness = thicknesss;
     size = sizee;
     s = ss;
 
-    t.setPosition(positionX, positionY);
+    t.setPosition(x, y);
     t.setFont(f);
-    t.setPosition(positionX, positionY);
     t.setOutlineThickness(thickness);
     t.setCharacterSize(size);
     t.setString(s);
@@ -20,5 +30,6 @@ Text::Text(int positionXX, int positionYY, int thicknesss, int sizee, std::strin
 
 void Text::draw(sf::RenderWindow& w)
 {
+    t.setString(s);
     w.draw(t);
 }

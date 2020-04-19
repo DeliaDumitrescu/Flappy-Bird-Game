@@ -55,7 +55,7 @@ void Pipe::reset()
         reset_x = 600;
 }
 
-Pipe& Pipe::operator = (const Pipe& other)
+Pipe& Pipe::operator =(const Pipe& other)
 {
     x = other.x;
     y = other.y;

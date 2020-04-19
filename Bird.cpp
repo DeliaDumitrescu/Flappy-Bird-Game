@@ -1,5 +1,7 @@
 #include "Bird.h"
-#include <bits/stdc++.h>
+#include <iostream>
+#include <filesystem>
+
  Bird::Bird(std::string val_name, int val_alive, int val_x, int val_y, int val_dy, int val_angle, std::string val_fileBird, std::string val_fileSound)
  {
     name = val_name;
@@ -10,17 +12,31 @@
     angle = val_angle;
     fileBird = val_fileBird;
     fileSound = val_fileSound;
-    if(fileBird != "")
+    try {
+        if (std::filesystem::exists(fileBird)) throw fileBird;
+        else throw 0;
+    }
+    catch (std::string fisier)
     {
-        t.loadFromFile(fileBird);
+        t.loadFromFile(fisier);
         s.setTexture(t);
         s.setPosition(x, y);
         s.setOrigin(30, 22);
     }
-    if(fileSound != "")
+    catch (bool nope) {
+        std::cout << "Nu am putut gasi fisierul " << fileBird << '\n';
+    }
+    try {
+        if (std::filesystem::exists(fileSound)) throw fileSound;
+        else throw 0;
+    }
+    catch (std::string fisier)
     {
         buffer.loadFromFile(fileSound);
         flap_sound.setBuffer(buffer);
+    }
+    catch (bool nope) {
+        std::cout << "Nu am putut gasi fisierul " << fileSound << '\n';
     }
  }
 
@@ -58,13 +74,13 @@ void Bird::reset()
     angle = 0;
 }
 
-Bird& Bird::operator ++ (int)
+Bird& Bird::operator ++(int)
 {
     this->jump();
     return *this;
 }
 
-Bird& Bird::operator -- (int)
+Bird& Bird::operator --(int)
 {
     this->fall();
     return *this;
@@ -74,4 +90,5 @@ std::istream& operator >> (std::istream& in, Bird& bird)
 {
     std::cout<< "Enter your bird's name and hit enter: ";
     in >> bird.name;
+    return in;
 }

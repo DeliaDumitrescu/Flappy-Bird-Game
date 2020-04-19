@@ -3,8 +3,9 @@
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
+#include "Objects.h"
 
-class Bird
+class Bird : public Object
 {
 private:
     std::string name;
@@ -13,25 +14,23 @@ private:
     sf::SoundBuffer buffer;
     sf::Sound flap_sound;
     bool alive;
-    float x, y, dy;
+    float dy;
     int angle;
     std::string fileBird, fileSound;
 
 public:
     Bird(std::string val_name = "Your bird", int val_alive = 1, int val_x = 120, int val_y = 500, int val_dy = 0, int val_angle = 0, std::string val_fileBird = "images//bird.png", std::string val_fileSound = "sounds//flap.wav" );
     sf::Sprite get_sprite() const { return s; };
-    std::string get_name() const { return name;};
+    std::string get_name() const { return name; };
     void jump();
     void fall();
-    void draw(sf::RenderWindow&);
+    void draw(sf::RenderWindow&) override;
     void reset();
-    int getX() const { return x; }
-    int getY() const { return y; }
     void die() { alive = 0; }
     bool isAlive() const { return alive; }
-    Bird& operator ++ (int);
+    Bird& operator ++(int);
     Bird& operator --(int);
-    friend std::istream& operator >> (std::istream&, Bird&);
+    friend std::istream& operator >>(std::istream&, Bird&);
 };
 
 

@@ -1,5 +1,6 @@
 #include "Score.h"
-#include <bits/stdc++.h>
+#include <iostream>
+#include <filesystem>
 
 Score::Score(int valuee, int positionXX, int positionYY, int thicknesss, int sizee, std::string fileNamee)
 {
@@ -9,9 +10,17 @@ Score::Score(int valuee, int positionXX, int positionYY, int thicknesss, int siz
     thickness = thicknesss;
     size = sizee;
     fileName = fileNamee;
-    if(fileName != "")
-    {   font.loadFromFile(fileNamee);
-         s.setFont(font);
+    try {
+        if (std::filesystem::exists(fileName)) throw fileName;
+        else throw 0;
+    }
+    catch (std::string fisier)
+    {
+        font.loadFromFile(fisier);
+        s.setFont(font);
+    }
+    catch (bool nope) {
+        std::cout << "Nu am putut gasi fisierul " << fileName << '\n';
     }
     s.setPosition(positionX, positionY);
     s.setOutlineThickness(thickness);
@@ -27,9 +36,17 @@ Score::Score(const Score& other)
     thickness = other.thickness;
     size = other.size;
     fileName = other.fileName;
-    if(fileName != "")
-    {   font.loadFromFile(fileName);
-         s.setFont(font);
+    try {
+        if (std::filesystem::exists(fileName)) throw fileName;
+        else throw 0;
+    }
+    catch (std::string fisier)
+    {
+        font.loadFromFile(fisier);
+        s.setFont(font);
+    }
+    catch (bool nope) {
+        std::cout << "Nu am putut gasi fisierul " << fileName << '\n';
     }
     s.setPosition(positionX, positionY);
     s.setOutlineThickness(thickness);
@@ -66,15 +83,15 @@ void Score::insertScore()
     allScores.push(value);
 }
 
-std::ostream& operator << (std::ostream& out, Score& score)
+std::ostream& operator <<(std::ostream& out, Score& score)
 {
-    out << "Highscore is " << score.allScores.top() << "\nAnd the other scores are: ";
-    score.allScores.pop();
+    out << "Highscore is " << (score.allScores.empty() ? 0 : score.allScores.top()) << "\nAnd the other scores are: ";
+    if(!score.allScores.empty()) score.allScores.pop();
     while(!score.allScores.empty())
     {
         out << score.allScores.top() << " ";
         score.allScores.pop();
     }
-    out << "\nSee you next time, thanks for playing!";
+    out << "\nSee you next time, thanks for playing!\n";
     return out;
 }

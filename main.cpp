@@ -1,10 +1,12 @@
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
+#include <iostream>
 #include "Bird.h"
 #include "Pipes.h"
 #include "Collision.h"
 #include "Score.h"
 #include "Text.h"
-#include <bits/stdc++.h>
+#include "Objects.h"
 
 int main()
 {
@@ -22,6 +24,8 @@ int main()
 
     Text gameOverText(140, 300, 3, 50, "Game Over! Press R for RESTART", "fonts//arial.ttf" );  //text
     Text startText(300, 300, 3, 60, "Left click to start!","fonts//arial.ttf" );
+    Text deathScoreText(140, 80, 3, 60, "0", "fonts//arial.ttf");
+    Text deathHSText(140, 150, 3, 60, "0", "fonts//arial.ttf");
 
     sf::SoundBuffer buffer_g_o;              //sunete
     buffer_g_o.loadFromFile("sounds//game_over.wav");
@@ -59,10 +63,7 @@ int main()
         sf::Event event;
         while (window.pollEvent(event))
         {
-            if (event.type == sf::Event::Closed)
-            {   window.close();
-                std::cout << "Let's look at " << bird.get_name() << "'s accomplishments: \n" << score;
-            }
+            if (event.type == sf::Event::Closed) window.close();
 
             if(event.type == sf::Event::MouseButtonPressed)
                 if (event.mouseButton.button == sf::Mouse::Left && bird.isAlive())
@@ -90,20 +91,20 @@ int main()
                     bird--;
                     delay.restart();
                 }
-            for (auto i : { &first,&second,&third }) i->move();
+                for (auto i : { &first,&second,&third }) i->move();
             }
         }
         else
         {
-            Text scoreText(140, 80, 3, 60, "Score: " + std::to_string(score.getValue()), "fonts//arial.ttf");
-            scoreText.draw(window);
-            Text hsText(140, 150, 3, 60, "Highscore: " + std::to_string(score.getHS()), "fonts//arial.ttf");
-            hsText.draw(window);
+            deathScoreText.setText("Score: " + std::to_string(score.getValue()));
+            deathScoreText.draw(window);
+            deathHSText.setText("Highscore: " + std::to_string(score.getHS()));
+            deathHSText.draw(window);
             gameOverText.draw(window);
             if(!g_o_sound_played) game_over_sound.play(), g_o_sound_played = 1;
         }
         window.display();
     }
-
+    std::cout << "Let's look at " << bird.get_name() << "'s accomplishments: \n" << score;
     return 0;
 }
