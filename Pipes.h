@@ -27,6 +27,7 @@ public:
     Pipe operator + (int) const;
     Pipe operator - (int) const;
     void operator += (int);
+    void operator -= (int);
 
 };
 

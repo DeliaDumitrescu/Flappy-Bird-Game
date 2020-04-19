@@ -4,15 +4,19 @@
 #include "Collision.h"
 #include "Score.h"
 #include "Text.h"
+#include <bits/stdc++.h>
 
 int main()
 {
+    Bird bird;
+    std::cin >> bird;
+
     sf::RenderWindow window(sf::VideoMode(1000, 800), "Flappy Bird");
     window.setFramerateLimit(360);
     sf::Clock delay;
     bool started = 0;
 
-    sf::Texture t;                           
+    sf::Texture t;
     t.loadFromFile("images//background.png");
     sf::Sprite background(t);
 
@@ -25,8 +29,6 @@ int main()
     game_over_sound.setBuffer(buffer_g_o);
     bool g_o_sound_played = 0;
                                //pasare, obstacole, collision
-    Bird bird;
-
     Pipe first(600, "images//Pipe_up.png", "images//Pipe_down.png");
     Pipe second;
     second = first + 500;
@@ -58,13 +60,15 @@ int main()
         while (window.pollEvent(event))
         {
             if (event.type == sf::Event::Closed)
-                window.close();
+            {   window.close();
+                std::cout << "Let's look at " << bird.get_name() << "'s accomplishments: \n" << score;
+            }
 
             if(event.type == sf::Event::MouseButtonPressed)
                 if (event.mouseButton.button == sf::Mouse::Left && bird.isAlive())
                 {
                     started = 1;
-                    bird.jump();
+                    bird++ ;
                     bird.draw(window);
                 }
             if (event.type == sf::Event::KeyPressed)
@@ -83,7 +87,7 @@ int main()
             if(started)
             {   if (delay.getElapsedTime().asSeconds() > 0.005)
                 {
-                    bird.fall();
+                    bird--;
                     delay.restart();
                 }
             for (auto i : { &first,&second,&third }) i->move();
@@ -100,8 +104,6 @@ int main()
         }
         window.display();
     }
-
-    //score.print();
 
     return 0;
 }

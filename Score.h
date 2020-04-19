@@ -27,7 +27,7 @@ public:
     Score& operator ++();
     Score operator ++(int);
     void insertScore();
+    friend std::ostream& operator << (std::ostream&, Score&);
 };
-
 
 #endif // SCORE_H

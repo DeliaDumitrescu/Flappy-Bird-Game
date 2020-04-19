@@ -1,4 +1,5 @@
 #include "Score.h"
+#include <bits/stdc++.h>
 
 Score::Score(int valuee, int positionXX, int positionYY, int thicknesss, int sizee, std::string fileNamee)
 {
@@ -63,4 +64,17 @@ Score Score::operator ++ (int)
 void Score::insertScore()
 {
     allScores.push(value);
+}
+
+std::ostream& operator << (std::ostream& out, Score& score)
+{
+    out << "Highscore is " << score.allScores.top() << "\nAnd the other scores are: ";
+    score.allScores.pop();
+    while(!score.allScores.empty())
+    {
+        out << score.allScores.top() << " ";
+        score.allScores.pop();
+    }
+    out << "\nSee you next time, thanks for playing!";
+    return out;
 }

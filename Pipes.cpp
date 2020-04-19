@@ -9,7 +9,7 @@ Pipe::Pipe(int val_x, std::string val_file_up, std::string val_file_down)
     file_up = val_file_up;
     file_down = val_file_down;
 
-    if(file_up != " " && file_down != "")
+    if(file_up != "" && file_down != "")
     {
         t_up.loadFromFile(file_up);
         t_down.loadFromFile(file_down);
@@ -89,7 +89,12 @@ Pipe Pipe::operator - (int val) const
 }
 
 
-void Pipe::operator +=(int val)
+void Pipe::operator += (int val)
 {
     this->x += val;
+}
+
+void Pipe::operator -= (int val)
+{
+    this->x -= val;
 }

@@ -1,7 +1,8 @@
 #include "Bird.h"
-
- Bird::Bird(int val_alive, int val_x, int val_y, int val_dy, int val_angle, std::string val_fileBird, std::string val_fileSound)
+#include <bits/stdc++.h>
+ Bird::Bird(std::string val_name, int val_alive, int val_x, int val_y, int val_dy, int val_angle, std::string val_fileBird, std::string val_fileSound)
  {
+    name = val_name;
     alive = val_alive;
     x = val_x;
     y = val_y;
@@ -55,4 +56,22 @@ void Bird::reset()
     dy = 0;
     alive = 1;
     angle = 0;
+}
+
+Bird& Bird::operator ++ (int)
+{
+    this->jump();
+    return *this;
+}
+
+Bird& Bird::operator -- (int)
+{
+    this->fall();
+    return *this;
+}
+
+std::istream& operator >> (std::istream& in, Bird& bird)
+{
+    std::cout<< "Enter your bird's name and hit enter: ";
+    in >> bird.name;
 }
