@@ -4,8 +4,8 @@
 #include "Bird.h"
 #include "Pipes.h"
 #include "Collision.h"
-#include "Score.h"
 #include "Text.h"
+#include "Score.h"
 #include "Objects.h"
 
 int main()
@@ -46,12 +46,12 @@ int main()
     while (window.isOpen())
     {
         objects.isCollide();
-        objects.update();
         if (bird.getY() > 700 && bird.isAlive())
         {
             score.insertScore();
             bird.die();
         }
+        objects.update();
 
         window.clear();
         window.draw(background);
@@ -69,7 +69,7 @@ int main()
                 if (event.mouseButton.button == sf::Mouse::Left && bird.isAlive())
                 {
                     started = 1;
-                    bird++ ;
+                    bird++;
                     bird.draw(window);
                 }
             if (event.type == sf::Event::KeyPressed)

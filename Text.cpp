@@ -12,7 +12,7 @@ Text::Text(int positionX, int positionY, int thicknesss, int sizee, std::string 
     catch (std::string fisier) {
         f.loadFromFile(fisier);
     }
-    catch (bool nope) {
+    catch (...) {
         std::cout << "Nu am putut gasi fisierul " << fileName << '\n';
     }
     x = positionX;
@@ -32,4 +32,22 @@ void Text::draw(sf::RenderWindow& w)
 {
     t.setString(s);
     w.draw(t);
+}
+
+Text& Text::operator =(const Text& other)
+{
+    fileName = other.fileName;
+    x = other.x;
+    y = other.y;
+    thickness = other.thickness;
+    size = other.size;
+    s = other.s;
+    f = other.f;
+
+    t.setPosition(x, y);
+    t.setFont(f);
+    t.setOutlineThickness(thickness);
+    t.setCharacterSize(size);
+    t.setString(s);
+    return *this;
 }

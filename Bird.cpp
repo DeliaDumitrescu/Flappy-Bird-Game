@@ -23,7 +23,7 @@
         s.setPosition(x, y);
         s.setOrigin(30, 22);
     }
-    catch (bool nope) {
+    catch (...) {
         std::cout << "Nu am putut gasi fisierul " << fileBird << '\n';
     }
     try {
@@ -35,7 +35,7 @@
         buffer.loadFromFile(fileSound);
         flap_sound.setBuffer(buffer);
     }
-    catch (bool nope) {
+    catch (...) {
         std::cout << "Nu am putut gasi fisierul " << fileSound << '\n';
     }
  }

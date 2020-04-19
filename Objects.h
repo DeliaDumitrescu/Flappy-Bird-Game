@@ -7,8 +7,6 @@ class Object
 {
 protected:
 	float x, y;
-	sf::Texture t;
-	sf::Sprite s;
 public:
 	float getX() const { return x; }
 	float getY() const { return y; }

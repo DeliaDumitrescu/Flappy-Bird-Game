@@ -2,85 +2,31 @@
 #include <iostream>
 #include <filesystem>
 
-Score::Score(int valuee, int positionXX, int positionYY, int thicknesss, int sizee, std::string fileNamee)
-{
-    value = valuee;
-    positionX = positionXX;
-    positionY = positionYY;
-    thickness = thicknesss;
-    size = sizee;
-    fileName = fileNamee;
-    try {
-        if (std::filesystem::exists(fileName)) throw fileName;
-        else throw 0;
-    }
-    catch (std::string fisier)
-    {
-        font.loadFromFile(fisier);
-        s.setFont(font);
-    }
-    catch (bool nope) {
-        std::cout << "Nu am putut gasi fisierul " << fileName << '\n';
-    }
-    s.setPosition(positionX, positionY);
-    s.setOutlineThickness(thickness);
-    s.setCharacterSize(size);
-}
-
 
 Score::Score(const Score& other)
 {
     value = other.value;
-    positionX = other.positionX;
-    positionY = other.positionY;
-    thickness = other.thickness;
-    size = other.size;
-    fileName = other.fileName;
-    try {
-        if (std::filesystem::exists(fileName)) throw fileName;
-        else throw 0;
-    }
-    catch (std::string fisier)
-    {
-        font.loadFromFile(fisier);
-        s.setFont(font);
-    }
-    catch (bool nope) {
-        std::cout << "Nu am putut gasi fisierul " << fileName << '\n';
-    }
-    s.setPosition(positionX, positionY);
-    s.setOutlineThickness(thickness);
-    s.setCharacterSize(size);
+    scoreText = other.scoreText;
 }
 
-
-void Score::resetValue()
-{
-    value = 0;
-}
 
 void Score::draw(sf::RenderWindow& w)
 {
-    s.setString(std::to_string(value));
-    w.draw(s);
+    scoreText.setText(std::to_string(value));
+    scoreText.draw(w);
 }
 
-Score& Score::operator ++ ()
+Score& Score::operator ++()
 {
     this->value ++;
     return *this;
 }
 
-Score Score::operator ++ (int)
+Score Score::operator ++(int)
 {
     Score aux(*this);
     ++(*this);
     return aux;
-}
-
-void Score::insertScore()
-{
-    allScores.push(value);
 }
 
 std::ostream& operator <<(std::ostream& out, Score& score)
