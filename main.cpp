@@ -34,8 +34,9 @@ int main()
     bool g_o_sound_played = 0;
                                //pasare, obstacole, collision
     Pipe first(600, "images//Pipe_up.png", "images//Pipe_down.png");
-    Pipe second;
-    second = first + 500;
+    Pipe* secondd = new Pipe(1100, "images//Pipe_up.png", "images//Pipe_down.png");
+    Object &r = *secondd;
+    Pipe &second = dynamic_cast<Pipe&>(r);
     Pipe third(first);
     third += 1000;
 
@@ -106,5 +107,6 @@ int main()
         window.display();
     }
     std::cout << "Let's look at " << bird.get_name() << "'s accomplishments: \n" << score;
+    delete secondd;
     return 0;
 }
