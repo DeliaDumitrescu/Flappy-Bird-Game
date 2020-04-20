@@ -45,12 +45,13 @@ int main()
     Collision objects(bird, first, second, third, score);
 
     auto tooLow = [&]() {return bird.getY() > 700 && bird.isAlive();};
+    auto tooHigh = [&]() {return bird.getY() < -10 && bird.isAlive();};
 
     while (window.isOpen())
     {
         objects.isCollide();
 
-        if(tooLow())
+        if(tooLow() || tooHigh())
         {
             score.insertScore();
             bird.die();
