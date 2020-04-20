@@ -35,8 +35,8 @@ int main()
                                //pasare, obstacole, collision
     Pipe first(600, "images//Pipe_up.png", "images//Pipe_down.png");
     Pipe* secondd = new Pipe(1100, "images//Pipe_up.png", "images//Pipe_down.png");
-    Object &r = *secondd;
-    Pipe &second = dynamic_cast<Pipe&>(r);
+    Object &o = *secondd;
+    Pipe &second = dynamic_cast<Pipe&>(o);
     Pipe third(first);
     third += 1000;
 
@@ -44,14 +44,18 @@ int main()
 
     Collision objects(bird, first, second, third, score);
 
+    auto tooLow = [&]() {return bird.getY() > 700 && bird.isAlive();};
+
     while (window.isOpen())
     {
         objects.isCollide();
-        if (bird.getY() > 700 && bird.isAlive())
+
+        if(tooLow())
         {
             score.insertScore();
             bird.die();
         }
+
         objects.update();
 
         window.clear();
