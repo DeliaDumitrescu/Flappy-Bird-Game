@@ -8,9 +8,11 @@ class Object
 protected:
 	float x, y;
 public:
-	float getX() const { return x; }
-	float getY() const { return y; }
+	inline float getX() const { return x; }
+	inline float getY() const { return y; }
 	virtual void draw(sf::RenderWindow&) = 0;
+    virtual void manageExceptions() = 0;
+    virtual ~Object(){}
 };
 
 #endif

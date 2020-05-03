@@ -16,14 +16,15 @@ public:
     Pipe(const Pipe&);
     void setX(int val) { x = val; }
     void setY(int val) { y = val; }
-    void draw(sf::RenderWindow&) override;
     void move() { x--; }
     void reset();
+    void draw(sf::RenderWindow&) override;
     Pipe& operator =(const Pipe&);
     Pipe operator +(int) const;
     Pipe operator -(int) const;
     void operator +=(int);
     void operator -=(int);
+    void manageExceptions();
 };
 
 #endif //PIPES_H

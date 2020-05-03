@@ -15,14 +15,14 @@ private:
 public:
     Score(int valuee = 0) : value(valuee) {}
     Score(const Score&);
-    void draw(sf::RenderWindow&);
-    int getValue() const { return value; }
-    int getHS() const { return allScores.empty() ? 0 : allScores.top(); }
+    inline int getValue() const { return value; }
+    inline int getHS() const { return allScores.empty() ? 0 : allScores.top(); }
+    void insertScore() { allScores.push(value); }
     void updateValue() { value++; }
     void resetValue() { value = 0; }
+    void draw(sf::RenderWindow&);
     Score& operator ++();
     Score operator ++(int);
-    void insertScore() { allScores.push(value); }
     friend std::ostream& operator << (std::ostream&, Score&);
 };
 

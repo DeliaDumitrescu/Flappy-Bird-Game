@@ -12,32 +12,8 @@
     angle = val_angle;
     fileBird = val_fileBird;
     fileSound = val_fileSound;
-    try {
-        if (std::filesystem::exists(fileBird)) throw fileBird;
-        else throw 0;
-    }
-    catch (std::string fisier)
-    {
-        t.loadFromFile(fisier);
-        s.setTexture(t);
-        s.setPosition(x, y);
-        s.setOrigin(30, 22);
-    }
-    catch (...) {
-        std::cout << "Nu am putut gasi fisierul " << fileBird << '\n';
-    }
-    try {
-        if (std::filesystem::exists(fileSound)) throw fileSound;
-        else throw 0;
-    }
-    catch (std::string fisier)
-    {
-        buffer.loadFromFile(fileSound);
-        flap_sound.setBuffer(buffer);
-    }
-    catch (...) {
-        std::cout << "Nu am putut gasi fisierul " << fileSound << '\n';
-    }
+
+    manageExceptions();
  }
 
 
@@ -91,4 +67,34 @@ std::istream& operator >> (std::istream& in, Bird& bird)
     std::cout<< "Enter your bird's name and hit enter: ";
     in >> bird.name;
     return in;
+}
+
+void Bird::manageExceptions()
+{
+    try {
+        if (std::filesystem::exists(fileBird)) throw fileBird;
+        else throw 0;
+    }
+    catch (std::string fisier)
+    {
+        t.loadFromFile(fisier);
+        s.setTexture(t);
+        s.setPosition(x, y);
+        s.setOrigin(30, 22);
+    }
+    catch (...) {
+        std::cout << "Couldn't find file " << fileBird << " for bird\n";
+    }
+    try {
+        if (std::filesystem::exists(fileSound)) throw fileSound;
+        else throw 0;
+    }
+    catch (std::string fisier)
+    {
+        buffer.loadFromFile(fileSound);
+        flap_sound.setBuffer(buffer);
+    }
+    catch (...) {
+        std::cout << "Couldn't find file " << fileSound << " for bird\n";
+    }
 }
