@@ -7,9 +7,46 @@
 #include "Text.h"
 #include "Score.h"
 #include "Objects.h"
+#include "sqlite3.h"
+
+static int callback(void* NotUsed, int argc, char** argv, char** azColName) {
+    int i;
+    for (i = 0; i < argc; i++) {
+        printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
+    }
+    printf("\n");
+    return 0;
+}
 
 int main()
 {
+    sqlite3* db;
+    int errDB;
+    const char* sql;
+    char* errMsg = 0;
+
+    errDB = sqlite3_open("flappy_bird.db", &db);
+    if (errDB) {
+        std::cout << "Can't open database: %s\n" << sqlite3_errmsg(db);
+        return 0;
+    }
+    else  std::cout << "Opened database successfully\n";
+    
+    sql = "CREATE TABLE PLAY_HISTORY("  \
+            "ID             INT PRIMARY KEY     NOT NULL," \
+            "NAME           TEXT    NOT NULL," \
+            "HIGHSCORE      INT     NOT NULL );";
+   
+    errDB = sqlite3_exec(db, sql, callback, 0, &errMsg);
+
+    if (errDB != SQLITE_OK) {
+        std::cout << errMsg << '\n';
+        sqlite3_free(errMsg);
+    }
+    else std::cout << "Table created successfully\n";
+ 
+    sqlite3_close(db);
+
     Bird bird;
     std::cin >> bird;
 

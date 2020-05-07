@@ -51,14 +51,7 @@ Pipe& Pipe::operator =(const Pipe& other)
     file_up = other.file_up;
     file_down = other.file_down;
 
-    if(file_up != " " && file_down != "")
-    {
-        t_up.loadFromFile(file_up);
-        t_down.loadFromFile(file_down);
-        s_up.setTexture(t_up); s_up.setOrigin(0, y); s_up.setPosition(x, 0);
-        s_down.setTexture(t_down);
-        s_down.setPosition(x, 1000 - y);
-    }
+    manageExceptions();
     return *this;
 }
 
