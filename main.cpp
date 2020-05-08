@@ -7,6 +7,7 @@
 #include "Text.h"
 #include "Score.h"
 #include "Objects.h"
+#include "ObjFactory.h"
 #include "sqlite3.h"
 
 static int callback(void* NotUsed, int argc, char** argv, char** azColName) {
@@ -20,7 +21,7 @@ static int callback(void* NotUsed, int argc, char** argv, char** azColName) {
 
 int main()
 {
-    sqlite3* db;
+    /*sqlite3* db;
     int errDB;
     const char* sql;
     char* errMsg = 0;
@@ -45,9 +46,12 @@ int main()
     }
     else std::cout << "Table created successfully\n";
  
-    sqlite3_close(db);
+    sqlite3_close(db);*/
 
-    Bird bird;
+    ObjectFactory* factory = new ObjectFactory;
+
+    //Bird bird;
+    Object* bird = factory->Create("bird");
     std::cin >> bird;
 
     sf::RenderWindow window(sf::VideoMode(1000, 800), "Flappy Bird");
