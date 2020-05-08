@@ -19,6 +19,8 @@ public:
     void move() { x--; }
     void reset();
     void draw(sf::RenderWindow&) override;
+    void updatePosition();
+    bool passed();
     Pipe& operator =(const Pipe&);
     Pipe operator +(int) const;
     Pipe operator -(int) const;

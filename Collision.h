@@ -7,6 +7,7 @@
 #include "Pipes.h"
 #include "Score.h"
 
+//Facade
 class Collision
 {
 private:
@@ -15,7 +16,6 @@ private:
 	Score &score;
 	sf::SoundBuffer buffer;
 	sf::Sound coin_sound;
-	int first_pipe_x, first_pipe_y;
 
 public:
 	Collision(Bird &b, Pipe &p1, Pipe &p2, Pipe &p3, Score &s) : bird(b), first(p1), second(p2), third(p3), score(s) {

@@ -41,3 +41,12 @@ std::ostream& operator <<(std::ostream& out, Score& score)
     out << "\nSee you next time, thanks for playing!\n";
     return out;
 }
+
+Pipe& Score::getCurrentPipe(Pipe& first, Pipe& second, Pipe& third)
+{
+    if(value % 3 == 0)
+        return first;
+    else if(value % 3 == 1)
+        return second;
+    return third;
+}

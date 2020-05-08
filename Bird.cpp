@@ -105,3 +105,10 @@ void Bird::manageExceptions()
         std::cout << "Couldn't find file " << fileSound << " for bird\n";
     }
 }
+
+bool Bird::hitsPipe(int pipe_x, int pipe_y)
+{
+    return x + 30 > pipe_x && (y - 22 < 800 - pipe_y || y + 22 > 1000 - pipe_y);
+
+}
+

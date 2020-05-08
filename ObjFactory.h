@@ -6,7 +6,7 @@
 #include "Bird.h"
 #include "Pipes.h"
 
-
+//Factory
 class ObjectFactory
 {
 public:

@@ -5,6 +5,7 @@
 #include <SFML/Audio.hpp>
 #include "Objects.h"
 
+//Singleton
 class Bird : public Object
 {
 private:
@@ -30,6 +31,7 @@ public:
     void fall();
     void reset();
     void die() { alive = 0; }
+    bool hitsPipe(int, int);
     void draw(sf::RenderWindow&) override;
     Bird& operator ++(int);
     Bird& operator --(int);

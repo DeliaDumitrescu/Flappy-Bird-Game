@@ -103,3 +103,16 @@ void Pipe::manageExceptions()
         std::cout << "Couldn't find both of the files " << file_up << " and " << file_down << " for pipes\n";
     }
 }
+
+void Pipe::updatePosition()
+{
+    if(x < -150)
+    {   x = 1350;
+        y = rand() % 400 + 350;
+    }
+}
+
+bool Pipe::passed()
+{
+    return x == 5;
+}

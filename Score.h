@@ -5,6 +5,7 @@
 #include <SFML/Audio.hpp>
 #include <queue>
 #include "Text.h"
+#include "Pipes.h"
 
 class Score
 {
@@ -24,6 +25,7 @@ public:
     Score& operator ++();
     Score operator ++(int);
     friend std::ostream& operator <<(std::ostream&, Score&);
+    Pipe& getCurrentPipe(Pipe&, Pipe&, Pipe&);
 };
 
 #endif // SCORE_H

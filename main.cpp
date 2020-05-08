@@ -15,17 +15,17 @@ int main()
     ObjectFactory* factory = new ObjectFactory;
 
     Object* _bird = factory->Create("bird");
-    Bird* bird = dynamic_cast<Bird*>(_bird); 
+    Bird* bird = dynamic_cast<Bird*>(_bird);
     std::cin >> (*bird);
                                         //pasare, obstacole, collision
     Object* _first = factory->Create("pipe");
     Pipe* first = dynamic_cast<Pipe*>(_first);
 
     Object* _second = factory->Create("pipe");
-    Pipe* second = dynamic_cast<Pipe*>(_second); 
+    Pipe* second = dynamic_cast<Pipe*>(_second);
     *second += 500;
 
-    Object* _third = factory->Create("pipe"); 
+    Object* _third = factory->Create("pipe");
     Pipe* third = dynamic_cast<Pipe*>(_third);
     *third = *first + 1000;
 
@@ -72,9 +72,8 @@ int main()
         window.draw(background);
         bird->draw(window);
 
-        first->draw(window);
-        second->draw(window);
-        third->draw(window);
+        for( auto pipe : { first, second, third } )
+            pipe->draw(window);
 
         score.draw(window);
         if (!started) startText.draw(window);
@@ -96,9 +95,8 @@ int main()
             if (event.type == sf::Event::KeyPressed)
                 if (event.key.code == sf::Keyboard::R)
                 {
-                    first->reset();
-                    second->reset();
-                    third->reset();
+                   for( auto pipe : { first, second, third } )
+                        pipe->reset();
                     bird->reset();
                     started = 0;
                     score.resetValue();
@@ -115,9 +113,8 @@ int main()
                     (*bird)--;
                     delay.restart();
                 }
-                first->move();
-                second->move();
-                third->move();
+                for( auto pipe : { first, second, third } )
+                        pipe->move();
             }
         }
         else
