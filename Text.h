@@ -8,15 +8,15 @@
 class Text
 {
 private:
-    float x, y;
+    int x, y;
     sf::Text t;
     sf::Font f;
     int thickness, size;
     std::string s;
     std::string fileName;
 public:
-    Text(int positionX = 0, int positionY = 0, int thicknesss = 0, int sizee = 0, std::string ss = "", std::string fileNamee = "");
-    template <typename T> void setText(T ss);
+    Text(int _x = 0, int _y = 0, int _thickness = 0, int _size = 0, std::string _s = "", std::string _fileName = "");
+    template <typename T> void setText(T _s);
     void draw(sf::RenderWindow&);
     Text& operator =(const Text&);
     void manageExceptions();

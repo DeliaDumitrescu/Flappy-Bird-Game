@@ -12,9 +12,13 @@ class ObjectFactory
 public:
 	Object* Create(const char objName[])
 	{
-		if (objName == "bird") return new Bird;
+		if (objName == "bird") return Bird::GetInstance();
+		else if(objName == "pipe") return new Pipe;
 		else
-            return new Pipe;
+		{
+			std::cout << "Obiect invalid!\n";
+			return nullptr;
+		}
 	}
 };
 

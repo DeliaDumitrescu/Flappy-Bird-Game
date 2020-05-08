@@ -2,16 +2,24 @@
 #include <iostream>
 #include <filesystem>
 
- Bird::Bird(std::string val_name, int val_alive, int val_x, int val_y, int val_dy, int val_angle, std::string val_fileBird, std::string val_fileSound)
+Bird* Bird::instance = nullptr;
+
+Bird* Bird::GetInstance()
+{
+    if (instance == nullptr) instance = new Bird();
+    return instance;
+}
+
+ Bird::Bird()
  {
-    name = val_name;
-    alive = val_alive;
-    x = val_x;
-    y = val_y;
-    dy = val_dy;
-    angle = val_angle;
-    fileBird = val_fileBird;
-    fileSound = val_fileSound;
+    name = "Your Bird";
+    alive = 1;
+    x = 120;
+    y = 500;
+    dy = 0;
+    angle = 0;
+    fileBird = "images//bird.png";
+    fileSound = "sounds//flap.wav";
     manageExceptions();
  }
 
@@ -61,7 +69,7 @@ Bird& Bird::operator --(int)
     return *this;
 }
 
-std::istream& operator >> (std::istream& in, Bird& bird)
+std::istream& operator >>(std::istream& in, Bird& bird)
 {
     std::cout<< "Enter your bird's name and hit enter: ";
     in >> bird.name;
@@ -90,7 +98,7 @@ void Bird::manageExceptions()
     }
     catch (std::string fisier)
     {
-        buffer.loadFromFile(fileSound);
+        buffer.loadFromFile(fisier);
         flap_sound.setBuffer(buffer);
     }
     catch (...) {

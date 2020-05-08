@@ -2,15 +2,15 @@
 #include <iostream>
 #include <filesystem>
 
-Text::Text(int positionX, int positionY, int thicknesss, int sizee, std::string ss, std::string fileNamee)
+Text::Text(int _x, int _y, int _thickness, int _size, std::string _s, std::string _fileName)
 {
-    fileName = fileNamee;
+    fileName = _fileName;
 
-    x = positionX;
-    y = positionY;
-    thickness = thicknesss;
-    size = sizee;
-    s = ss;
+    x = _x;
+    y = _y;
+    thickness = _thickness;
+    size = _size;
+    s = _s;
 
     manageExceptions();
 
@@ -46,15 +46,15 @@ Text& Text::operator =(const Text& other)
 }
 
 template<>
-void Text::setText<std::string>(std::string ss)
+void Text::setText<std::string>(std::string _s)
 {
-    s = ss;
+    s = _s;
 }
 
 template<typename T>
-void Text::setText(T ss)
+void Text::setText(T _s)
 {
- s = std::to_string(ss);
+ s = std::to_string(_s);
 }
 
 //template void Text::setText <int> (int);

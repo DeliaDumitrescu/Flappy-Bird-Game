@@ -14,19 +14,19 @@ int main()
 
     ObjectFactory* factory = new ObjectFactory;
 
-    Object* _bird = factory->Create("bird"); //ob
-    Bird* bird = dynamic_cast<Bird*>(_bird); //bird
+    Object* _bird = factory->Create("bird");
+    Bird* bird = dynamic_cast<Bird*>(_bird); 
     std::cin >> (*bird);
                                         //pasare, obstacole, collision
-    Object* _first = factory->Create("pipe"); //ob
-    Pipe* first = dynamic_cast<Pipe*>(_first); //bird
+    Object* _first = factory->Create("pipe");
+    Pipe* first = dynamic_cast<Pipe*>(_first);
 
-    Object* _second = factory->Create("pipe"); //ob
-    Pipe* second = dynamic_cast<Pipe*>(_second); //bird
+    Object* _second = factory->Create("pipe");
+    Pipe* second = dynamic_cast<Pipe*>(_second); 
     *second += 500;
 
-    Object* _third = factory->Create("pipe"); //ob
-    Pipe* third = dynamic_cast<Pipe*>(_third); //bird
+    Object* _third = factory->Create("pipe"); 
+    Pipe* third = dynamic_cast<Pipe*>(_third);
     *third = *first + 1000;
 
     Score score;

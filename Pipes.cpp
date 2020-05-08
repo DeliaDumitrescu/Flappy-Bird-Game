@@ -4,12 +4,12 @@
 
 int Pipe::reset_x = 600;
 
-Pipe::Pipe(int val_x, std::string val_file_up, std::string val_file_down)
+Pipe::Pipe(int _x, std::string _file_up, std::string _file_down)
 {
-    x = val_x;
+    x = _x;
     y = rand() % 400 + 350;
-    file_up = val_file_up;
-    file_down = val_file_down;
+    file_up = _file_up;
+    file_down = _file_down;
     manageExceptions();
 }
 
@@ -51,7 +51,12 @@ Pipe& Pipe::operator =(const Pipe& other)
     file_up = other.file_up;
     file_down = other.file_down;
 
-    manageExceptions();
+    t_up.loadFromFile(file_up);
+    t_down.loadFromFile(file_down);
+    s_up.setTexture(t_up); s_up.setOrigin(0, y); s_up.setPosition(x, 0);
+    s_down.setTexture(t_down);
+    s_down.setPosition(x, 1000 - y);
+
     return *this;
 }
 
