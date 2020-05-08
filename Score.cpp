@@ -42,11 +42,11 @@ std::ostream& operator <<(std::ostream& out, Score& score)
     return out;
 }
 
-Pipe& Score::getCurrentPipe(Pipe& first, Pipe& second, Pipe& third)
+std::pair <int, int> Score::getNextCoords(Pipe& first, Pipe& second, Pipe& third)
 {
     if(value % 3 == 0)
-        return first;
+        return std::make_pair(first.getX(), first.getY());
     else if(value % 3 == 1)
-        return second;
-    return third;
+        return std::make_pair(second.getX(), second.getY());
+    return std::make_pair(third.getX(), third.getY());
 }

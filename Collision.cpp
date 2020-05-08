@@ -2,16 +2,13 @@
 
 void Collision::isCollide()
 {
-	Pipe currentPipe = score.getCurrentPipe(first, second, third);
-	float x = currentPipe.getX();
-	float y = currentPipe.getY();
+	std::pair <int, int> coords = score.getNextCoords(first, second, third);
 
-	if(bird.hitsPipe(x, y) && bird.isAlive())
+	if(bird.hitsPipe(coords.first, coords.second) && bird.isAlive())
 		{
 			score.insertScore();
 			bird.die();
 		}
-
 }
 
 void Collision::update()

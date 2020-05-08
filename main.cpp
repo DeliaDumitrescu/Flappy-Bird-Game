@@ -11,7 +11,32 @@
 
 int main()
 {
+    /*sqlite3* db;
+    int errDB;
+    const char* sql;
+    char* errMsg = 0;
 
+    errDB = sqlite3_open("flappy_bird.db", &db);
+    if (errDB) {
+        std::cout << "Can't open database: %s\n" << sqlite3_errmsg(db);
+        return 0;
+    }
+    else  std::cout << "Opened database successfully\n";
+
+    sql = "CREATE TABLE PLAY_HISTORY("  \
+            "ID             INT PRIMARY KEY     NOT NULL," \
+            "NAME           TEXT    NOT NULL," \
+            "HIGHSCORE      INT     NOT NULL );";
+
+    errDB = sqlite3_exec(db, sql, callback, 0, &errMsg);
+
+    if (errDB != SQLITE_OK) {
+        std::cout << errMsg << '\n';
+        sqlite3_free(errMsg);
+    }
+    else std::cout << "Table created successfully\n";
+
+    sqlite3_close(db);*/
     ObjectFactory* factory = new ObjectFactory;
 
     Object* _bird = factory->Create("bird");
@@ -29,9 +54,9 @@ int main()
     Pipe* third = dynamic_cast<Pipe*>(_third);
     *third = *first + 1000;
 
-    Score score;
+    std::unique_ptr <Score> score = std::make_unique <Score>();
 
-    Collision objects(*bird, *first, *second, *third, score);
+    Collision objects(*bird, *first, *second, *third, *score);
 
     sf::RenderWindow window(sf::VideoMode(1000, 800), "Flappy Bird");
     window.setFramerateLimit(360);
@@ -62,7 +87,7 @@ int main()
 
         if(tooLow() || tooHigh())
         {
-            score.insertScore();
+            score->insertScore();
             bird->die();
         }
 
@@ -75,7 +100,7 @@ int main()
         for( auto pipe : { first, second, third } )
             pipe->draw(window);
 
-        score.draw(window);
+        score->draw(window);
         if (!started) startText.draw(window);
 
         sf::Event event;
@@ -85,7 +110,6 @@ int main()
 
             if(event.type == sf::Event::MouseButtonPressed)
                 if (event.mouseButton.button == sf::Mouse::Left && bird->isAlive())
-
                 {
                     started = 1;
                     (*bird)++;
@@ -99,7 +123,7 @@ int main()
                         pipe->reset();
                     bird->reset();
                     started = 0;
-                    score.resetValue();
+                    score->resetValue();
                     g_o_sound_played = 0;
                 }
 
@@ -113,22 +137,22 @@ int main()
                     (*bird)--;
                     delay.restart();
                 }
-                for( auto pipe : { first, second, third } )
+                for(auto pipe : { first, second, third })
                         pipe->move();
             }
         }
         else
         {
-            deathScoreText.setText("Score: " + std::to_string(score.getValue()));
+            deathScoreText.setText("Score: " + std::to_string(score->getValue()));
             deathScoreText.draw(window);
-            deathHSText.setText("Highscore: " + std::to_string(score.getHS()));
+            deathHSText.setText("Highscore: " + std::to_string(score->getHS()));
             deathHSText.draw(window);
             gameOverText.draw(window);
             if(!g_o_sound_played) game_over_sound.play(), g_o_sound_played = 1;
         }
         window.display();
     }
-    std::cout << "Let's look at " << bird->get_name() << "'s accomplishments: \n" << score;
+    std::cout << "Let's look at " << bird->get_name() << "'s accomplishments: \n" << *score;
 
     delete _bird;
     delete _first;
