@@ -12,7 +12,7 @@ private:
     sf::Sprite s_up, s_down;
     std::string file_up, file_down;
 public:
-    Pipe(int val_x = 0, std::string val_file_up = "", std::string val_file_down = "");
+    Pipe(int val_x = 600, std::string val_file_up = "images//Pipe_up.png", std::string val_file_down = "images//Pipe_down.png");
     Pipe(const Pipe&);
     void setX(int val) { x = val; }
     void setY(int val) { y = val; }

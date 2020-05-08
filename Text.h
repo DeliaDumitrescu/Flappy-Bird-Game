@@ -5,9 +5,10 @@
 #include <iostream>
 #include "Objects.h"
 
-class Text: public Object
+class Text
 {
 private:
+    float x, y;
     sf::Text t;
     sf::Font f;
     int thickness, size;

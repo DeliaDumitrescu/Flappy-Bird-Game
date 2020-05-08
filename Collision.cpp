@@ -24,7 +24,7 @@ void Collision::isCollide()
 void Collision::update()
 {
 	for (auto i : { &first, &second, &third }) {
-		if (i->getX() < -150) i->setX(1350), i->setY(rand() % 400 + 350);
-		if (i->getX() == 5 && bird.isAlive()) score++, coin_sound.play();
+		if (i->getX() < -150) i->setX(1350), i->setY(rand() % 400 + 350);   ////updatePipePoisition(setX + setY)
+		if (i->getX() == 5 && bird.isAlive()) score++, coin_sound.play();   //passedThroughPipe
 	}
 }

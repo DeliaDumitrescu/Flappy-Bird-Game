@@ -8,51 +8,30 @@
 #include "Score.h"
 #include "Objects.h"
 #include "ObjFactory.h"
-#include "sqlite3.h"
-
-static int callback(void* NotUsed, int argc, char** argv, char** azColName) {
-    int i;
-    for (i = 0; i < argc; i++) {
-        printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
-    }
-    printf("\n");
-    return 0;
-}
 
 int main()
 {
-    /*sqlite3* db;
-    int errDB;
-    const char* sql;
-    char* errMsg = 0;
-
-    errDB = sqlite3_open("flappy_bird.db", &db);
-    if (errDB) {
-        std::cout << "Can't open database: %s\n" << sqlite3_errmsg(db);
-        return 0;
-    }
-    else  std::cout << "Opened database successfully\n";
-    
-    sql = "CREATE TABLE PLAY_HISTORY("  \
-            "ID             INT PRIMARY KEY     NOT NULL," \
-            "NAME           TEXT    NOT NULL," \
-            "HIGHSCORE      INT     NOT NULL );";
-   
-    errDB = sqlite3_exec(db, sql, callback, 0, &errMsg);
-
-    if (errDB != SQLITE_OK) {
-        std::cout << errMsg << '\n';
-        sqlite3_free(errMsg);
-    }
-    else std::cout << "Table created successfully\n";
- 
-    sqlite3_close(db);*/
 
     ObjectFactory* factory = new ObjectFactory;
 
-    //Bird bird;
-    Object* bird = factory->Create("bird");
-    std::cin >> bird;
+    Object* _bird = factory->Create("bird"); //ob
+    Bird* bird = dynamic_cast<Bird*>(_bird); //bird
+    std::cin >> (*bird);
+                                        //pasare, obstacole, collision
+    Object* _first = factory->Create("pipe"); //ob
+    Pipe* first = dynamic_cast<Pipe*>(_first); //bird
+
+    Object* _second = factory->Create("pipe"); //ob
+    Pipe* second = dynamic_cast<Pipe*>(_second); //bird
+    *second += 500;
+
+    Object* _third = factory->Create("pipe"); //ob
+    Pipe* third = dynamic_cast<Pipe*>(_third); //bird
+    *third = *first + 1000;
+
+    Score score;
+
+    Collision objects(*bird, *first, *second, *third, score);
 
     sf::RenderWindow window(sf::VideoMode(1000, 800), "Flappy Bird");
     window.setFramerateLimit(360);
@@ -73,20 +52,9 @@ int main()
     sf::Sound game_over_sound;
     game_over_sound.setBuffer(buffer_g_o);
     bool g_o_sound_played = 0;
-                               //pasare, obstacole, collision
-    Pipe first(600, "images//Pipe_up.png", "images//Pipe_down.png");
-    Pipe* secondd = new Pipe(1100, "images//Pipe_up.png", "images//Pipe_down.png");
-    Object &o = *secondd;
-    Pipe &second = dynamic_cast<Pipe&>(o);
-    Pipe third(first);
-    third += 1000;
 
-    Score score;
-
-    Collision objects(bird, first, second, third, score);
-
-    auto tooLow = [&]() {return bird.getY() > 700 && bird.isAlive();};
-    auto tooHigh = [&]() {return bird.getY() < -10 && bird.isAlive();};
+    auto tooLow = [&]() {return bird->getY() > 700 && bird->isAlive();};
+    auto tooHigh = [&]() {return bird->getY() < -10 && bird->isAlive();};
 
     while (window.isOpen())
     {
@@ -95,15 +63,19 @@ int main()
         if(tooLow() || tooHigh())
         {
             score.insertScore();
-            bird.die();
+            bird->die();
         }
 
         objects.update();
 
         window.clear();
         window.draw(background);
-        bird.draw(window);
-        for (auto i : { &first,&second,&third }) i->draw(window);
+        bird->draw(window);
+
+        first->draw(window);
+        second->draw(window);
+        third->draw(window);
+
         score.draw(window);
         if (!started) startText.draw(window);
 
@@ -113,32 +85,39 @@ int main()
             if (event.type == sf::Event::Closed) window.close();
 
             if(event.type == sf::Event::MouseButtonPressed)
-                if (event.mouseButton.button == sf::Mouse::Left && bird.isAlive())
+                if (event.mouseButton.button == sf::Mouse::Left && bird->isAlive())
+
                 {
                     started = 1;
-                    bird++;
-                    bird.draw(window);
+                    (*bird)++;
+                    bird->draw(window);
                 }
+
             if (event.type == sf::Event::KeyPressed)
                 if (event.key.code == sf::Keyboard::R)
                 {
-                    for (auto i : { &first,&second,&third }) i->reset();
-                    bird.reset(); //default
+                    first->reset();
+                    second->reset();
+                    third->reset();
+                    bird->reset();
                     started = 0;
                     score.resetValue();
                     g_o_sound_played = 0;
                 }
+
         }
 
-        if (bird.isAlive())
+        if(bird->isAlive())
         {
             if(started)
             {   if (delay.getElapsedTime().asSeconds() > 0.005)
                 {
-                    bird--;
+                    (*bird)--;
                     delay.restart();
                 }
-                for (auto i : { &first,&second,&third }) i->move();
+                first->move();
+                second->move();
+                third->move();
             }
         }
         else
@@ -152,7 +131,13 @@ int main()
         }
         window.display();
     }
-    std::cout << "Let's look at " << bird.get_name() << "'s accomplishments: \n" << score;
-    delete secondd;
+    std::cout << "Let's look at " << bird->get_name() << "'s accomplishments: \n" << score;
+
+    delete _bird;
+    delete _first;
+    delete _second;
+    delete _third;
+    delete factory;
+
     return 0;
 }

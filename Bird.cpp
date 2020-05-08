@@ -12,7 +12,6 @@
     angle = val_angle;
     fileBird = val_fileBird;
     fileSound = val_fileSound;
-
     manageExceptions();
  }
 
