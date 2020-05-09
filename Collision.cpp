@@ -5,10 +5,10 @@ void Collision::isCollide()
 	std::pair <int, int> coords = score.getNextCoords(first, second, third);
 
 	if(bird.hitsPipe(coords.first, coords.second) && bird.isAlive())
-		{
-			score.insertScore();
-			bird.die();
-		}
+	{
+		score.insertScore();
+		bird.die();
+	}
 }
 
 void Collision::update()

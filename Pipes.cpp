@@ -102,6 +102,20 @@ void Pipe::manageExceptions()
     catch (...) {
         std::cout << "Couldn't find both of the files " << file_up << " and " << file_down << " for pipes\n";
     }
+    /*try {
+        if (!std::filesystem::exists(file_up) && !std::filesystem::exists(file_down)) throw Exception("Couldn't find pipe files");
+        else throw 1;
+    }
+    catch (const Exception& err) {
+        std::cout << err.what();
+    }
+    catch (...) {
+        t_up.loadFromFile(file_up);
+        t_down.loadFromFile(file_down);
+        s_up.setTexture(t_up); s_up.setOrigin(0, y); s_up.setPosition(x, 0);
+        s_down.setTexture(t_down);
+        s_down.setPosition(x, 1000 - y);
+    }*/
 }
 
 void Pipe::updatePosition()

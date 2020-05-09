@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "Objects.h"
+#include "Exceptions.h"
 
 class Pipe : public Object
 {

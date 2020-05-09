@@ -71,4 +71,14 @@ void Text::manageExceptions()
     catch (...) {
         std::cout << "Couldn't find the file " << fileName << " for text \n";
     }
+    /*try {
+        if (!std::filesystem::exists(fileName)) throw file_not_found_error(fileName);
+        else throw 1;
+    }
+    catch (const file_not_found_error& err) {
+        std::cout << err.what();
+    }
+    catch (...) {
+        f.loadFromFile(fileName);
+    }*/
 }

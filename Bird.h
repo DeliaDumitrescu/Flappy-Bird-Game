@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include "Objects.h"
+#include "Exceptions.h"
 
 //Singleton
 class Bird : public Object

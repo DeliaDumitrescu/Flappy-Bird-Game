@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include "Objects.h"
+#include "Exceptions.h"
 
 class Text
 {

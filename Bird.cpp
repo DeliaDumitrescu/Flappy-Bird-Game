@@ -104,6 +104,30 @@ void Bird::manageExceptions()
     catch (...) {
         std::cout << "Couldn't find file " << fileSound << " for bird\n";
     }
+    /*try {
+        if (!std::filesystem::exists(fileBird)) throw file_not_found_error(fileBird);
+        else throw 1;
+    }
+    catch (const file_not_found_error& err) {
+        std::cout << err.what();
+    }
+    catch (...) {
+        t.loadFromFile(fisier);
+        s.setTexture(t);
+        s.setPosition(x, y);
+        s.setOrigin(30, 22);
+    }*/
+    /*try {
+        if (!std::filesystem::exists(fileSound)) throw file_not_found_error(fileSound);
+        else throw 1;
+    }
+    catch (const file_not_found_error& err) {
+        std::cout << err.what();
+    }
+    catch (...) {
+        buffer.loadFromFile(fisier);
+        flap_sound.setBuffer(buffer);
+    }*/
 }
 
 bool Bird::hitsPipe(int pipe_x, int pipe_y)
