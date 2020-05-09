@@ -62,16 +62,6 @@ void Text::setText(T _s)
 void Text::manageExceptions()
 {
     try {
-        if (std::filesystem::exists(fileName)) throw fileName;
-        else throw 0;
-    }
-    catch (std::string fisier) {
-        f.loadFromFile(fisier);
-    }
-    catch (...) {
-        std::cout << "Couldn't find the file " << fileName << " for text \n";
-    }
-    /*try {
         if (!std::filesystem::exists(fileName)) throw file_not_found_error(fileName);
         else throw 1;
     }
@@ -80,5 +70,5 @@ void Text::manageExceptions()
     }
     catch (...) {
         f.loadFromFile(fileName);
-    }*/
+    }
 }

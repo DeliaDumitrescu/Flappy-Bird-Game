@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
+#include <filesystem>
 #include "Bird.h"
 #include "Pipes.h"
 #include "Score.h"

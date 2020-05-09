@@ -20,11 +20,7 @@ Pipe::Pipe(const Pipe& other)
     file_up = other.file_up;
     file_down = other.file_down;
 
-    t_up.loadFromFile(file_up);
-    t_down.loadFromFile(file_down);
-    s_up.setTexture(t_up); s_up.setOrigin(0, y); s_up.setPosition(x, 0);
-    s_down.setTexture(t_down);
-    s_down.setPosition(x, 1000 - y);
+    manageExceptions();
 }
 
 void Pipe::draw(sf::RenderWindow &window)
@@ -51,12 +47,7 @@ Pipe& Pipe::operator =(const Pipe& other)
     file_up = other.file_up;
     file_down = other.file_down;
 
-    t_up.loadFromFile(file_up);
-    t_down.loadFromFile(file_down);
-    s_up.setTexture(t_up); s_up.setOrigin(0, y); s_up.setPosition(x, 0);
-    s_down.setTexture(t_down);
-    s_down.setPosition(x, 1000 - y);
-
+    manageExceptions();
     return *this;
 }
 
@@ -88,22 +79,7 @@ void Pipe::operator -=(int val)
 void Pipe::manageExceptions()
 {
     try {
-        if (std::filesystem::exists(file_up) && std::filesystem::exists(file_down)) throw "ok";
-        else throw 0;
-    }
-    catch (const char s[])
-    {
-        t_up.loadFromFile(file_up);
-        t_down.loadFromFile(file_down);
-        s_up.setTexture(t_up); s_up.setOrigin(0, y); s_up.setPosition(x, 0);
-        s_down.setTexture(t_down);
-        s_down.setPosition(x, 1000 - y);
-    }
-    catch (...) {
-        std::cout << "Couldn't find both of the files " << file_up << " and " << file_down << " for pipes\n";
-    }
-    /*try {
-        if (!std::filesystem::exists(file_up) && !std::filesystem::exists(file_down)) throw Exception("Couldn't find pipe files");
+        if (!std::filesystem::exists(file_up) || !std::filesystem::exists(file_down)) throw Exception("Missing pipe's files!\n");
         else throw 1;
     }
     catch (const Exception& err) {
@@ -115,7 +91,7 @@ void Pipe::manageExceptions()
         s_up.setTexture(t_up); s_up.setOrigin(0, y); s_up.setPosition(x, 0);
         s_down.setTexture(t_down);
         s_down.setPosition(x, 1000 - y);
-    }*/
+    }
 }
 
 void Pipe::updatePosition()

@@ -2,6 +2,7 @@
 #define EXCEPTIONS_H
 
 #include <SFML/Graphics.hpp>
+#include <iostream>
 
 
 class Exception : public std::exception
@@ -19,12 +20,8 @@ class file_not_found_error : public Exception
 {
 	std::string fileName;
 public:
-	file_not_found_error(std::string& _fileName) : Exception("Couldn't find "), fileName(_fileName) {}
-	const char* what() const throw() {
-		std::string aux = msg + fileName;
-		//std::cout << msg.c_str() << '\n' << fileName.c_str() << '\n' << (aux).c_str() << '\n';
-		return aux.c_str();
-	}
+	file_not_found_error(std::string& _fileName) : Exception("Couldn't find "), fileName(_fileName) { msg += fileName; }
+	const char* what() const throw() { return msg.c_str(); }
 };
 
 #endif

@@ -79,55 +79,29 @@ std::istream& operator >>(std::istream& in, Bird& bird)
 void Bird::manageExceptions()
 {
     try {
-        if (std::filesystem::exists(fileBird)) throw fileBird;
-        else throw 0;
-    }
-    catch (std::string fisier)
-    {
-        t.loadFromFile(fisier);
-        s.setTexture(t);
-        s.setPosition(x, y);
-        s.setOrigin(30, 22);
-    }
-    catch (...) {
-        std::cout << "Couldn't find file " << fileBird << " for bird\n";
-    }
-    try {
-        if (std::filesystem::exists(fileSound)) throw fileSound;
-        else throw 0;
-    }
-    catch (std::string fisier)
-    {
-        buffer.loadFromFile(fisier);
-        flap_sound.setBuffer(buffer);
-    }
-    catch (...) {
-        std::cout << "Couldn't find file " << fileSound << " for bird\n";
-    }
-    /*try {
         if (!std::filesystem::exists(fileBird)) throw file_not_found_error(fileBird);
         else throw 1;
     }
     catch (const file_not_found_error& err) {
-        std::cout << err.what();
+        std::cout << err.what() << '\n';
     }
     catch (...) {
-        t.loadFromFile(fisier);
+        t.loadFromFile(fileBird);
         s.setTexture(t);
         s.setPosition(x, y);
         s.setOrigin(30, 22);
-    }*/
-    /*try {
+    }
+    try {
         if (!std::filesystem::exists(fileSound)) throw file_not_found_error(fileSound);
         else throw 1;
     }
     catch (const file_not_found_error& err) {
-        std::cout << err.what();
+        std::cout << err.what() << '\n';
     }
     catch (...) {
-        buffer.loadFromFile(fisier);
+        buffer.loadFromFile(fileSound);
         flap_sound.setBuffer(buffer);
-    }*/
+    }
 }
 
 bool Bird::hitsPipe(int pipe_x, int pipe_y)
