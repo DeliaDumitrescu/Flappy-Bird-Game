@@ -42,7 +42,7 @@ std::ostream& operator <<(std::ostream& out, Score& score)
     return out;
 }
 
-std::pair <int, int> Score::getNextCoords(Pipe& first, Pipe& second, Pipe& third)
+std::pair <float, float> Score::getNextCoords(Pipe& first, Pipe& second, Pipe& third)
 {
     if(value % 3 == 0)
         return std::make_pair(first.getX(), first.getY());

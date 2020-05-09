@@ -11,7 +11,7 @@ class Score
 {
 private:
     int value;
-    Text scoreText{10, 0, 3, 60, "", "fonts//Flappy-Bird.ttf"};
+    Text<int> scoreText{10, 0, 3, 60, "", "fonts//Flappy-Bird.ttf"};
     std::priority_queue <int> allScores;
 public:
     Score(int _value = 0) : value(_value) {}
@@ -25,7 +25,7 @@ public:
     Score& operator ++();
     Score operator ++(int);
     friend std::ostream& operator <<(std::ostream&, Score&);
-    std::pair <int, int> getNextCoords(Pipe&, Pipe&, Pipe&);
+    std::pair <float, float> getNextCoords(Pipe&, Pipe&, Pipe&);
 };
 
 #endif // SCORE_H

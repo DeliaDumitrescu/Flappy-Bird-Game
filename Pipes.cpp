@@ -2,9 +2,9 @@
 #include <iostream>
 #include <filesystem>
 
-int Pipe::reset_x = 600;
+float Pipe::reset_x = 600;
 
-Pipe::Pipe(int _x, std::string _file_up, std::string _file_down)
+Pipe::Pipe(float _x, std::string _file_up, std::string _file_down)
 {
     x = _x;
     y = rand() % 400 + 350;
@@ -51,27 +51,27 @@ Pipe& Pipe::operator =(const Pipe& other)
     return *this;
 }
 
-Pipe Pipe::operator +(int val) const
+Pipe Pipe::operator +(float val) const
 {
     Pipe aux(*this);
     aux.x += val;
     return aux;
 }
 
-Pipe Pipe::operator -(int val) const
+Pipe Pipe::operator -(float val) const
 {
     Pipe aux(*this);
-    aux.x += val;
+    aux.x -= val;
     return aux;
 }
 
 
-void Pipe::operator +=(int val)
+void Pipe::operator +=(float val)
 {
     this->x += val;
 }
 
-void Pipe::operator -=(int val)
+void Pipe::operator -=(float val)
 {
     this->x -= val;
 }

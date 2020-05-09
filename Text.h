@@ -6,18 +6,18 @@
 #include "Objects.h"
 #include "Exceptions.h"
 
+template <class T>
 class Text
 {
 private:
-    int x, y;
+    T x, y, thickness, size;
     sf::Text t;
     sf::Font f;
-    int thickness, size;
     std::string s;
     std::string fileName;
 public:
-    Text(int _x = 0, int _y = 0, int _thickness = 0, int _size = 0, std::string _s = "", std::string _fileName = "");
-    template <typename T> void setText(T _s);
+    Text(T _x = 0, T _y = 0, T _thickness = 0, T _size = 0, std::string _s = "", std::string _fileName = "");
+    void setText(std::string _s){s = _s;}
     void draw(sf::RenderWindow&);
     Text& operator =(const Text&);
     void manageExceptions();

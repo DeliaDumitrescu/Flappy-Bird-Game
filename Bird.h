@@ -32,10 +32,11 @@ public:
     void fall();
     void reset();
     void die() { alive = 0; }
-    bool hitsPipe(int, int);
+    bool hitsPipe(float, float);
     void draw(sf::RenderWindow&) override;
     Bird& operator ++(int);
     Bird& operator --(int);
+    //de adaugat ++ normal maybe
     friend std::istream& operator >>(std::istream&, Bird&);
     void manageExceptions();
 };

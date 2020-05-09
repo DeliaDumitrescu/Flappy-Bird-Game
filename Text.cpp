@@ -2,7 +2,10 @@
 #include <iostream>
 #include <filesystem>
 
-Text::Text(int _x, int _y, int _thickness, int _size, std::string _s, std::string _fileName)
+template class Text<int>;
+
+template <class T>
+Text<T>::Text(T _x, T _y, T _thickness, T _size, std::string _s, std::string _fileName)
 {
     fileName = _fileName;
 
@@ -21,13 +24,15 @@ Text::Text(int _x, int _y, int _thickness, int _size, std::string _s, std::strin
     t.setString(s);
 }
 
-void Text::draw(sf::RenderWindow& w)
+template <class T>
+void Text<T>::draw(sf::RenderWindow& w)
 {
     t.setString(s);
     w.draw(t);
 }
 
-Text& Text::operator =(const Text& other)
+template <class T>
+Text<T>& Text<T>::operator =(const Text& other)
 {
     fileName = other.fileName;
     x = other.x;
@@ -45,21 +50,8 @@ Text& Text::operator =(const Text& other)
     return *this;
 }
 
-template<>
-void Text::setText<std::string>(std::string _s)
-{
-    s = _s;
-}
-
-template<typename T>
-void Text::setText(T _s)
-{
- s = std::to_string(_s);
-}
-
-//template void Text::setText <int> (int);
-
-void Text::manageExceptions()
+template <class T>
+void Text<T>::manageExceptions()
 {
     try {
         if (!std::filesystem::exists(fileName)) throw file_not_found_error(fileName);

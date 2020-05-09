@@ -104,7 +104,7 @@ void Bird::manageExceptions()
     }
 }
 
-bool Bird::hitsPipe(int pipe_x, int pipe_y)
+bool Bird::hitsPipe(float pipe_x, float pipe_y)
 {
     return x + 30 > pipe_x && (y - 22 < 800 - pipe_y || y + 22 > 1000 - pipe_y);
 

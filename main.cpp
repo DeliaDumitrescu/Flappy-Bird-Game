@@ -67,10 +67,10 @@ int main()
     t.loadFromFile("images//background.png");
     sf::Sprite background(t);
 
-    Text gameOverText(140, 300, 3, 50, "Game Over! Press R for RESTART", "fonts//arial.ttf" );  //text
-    Text startText(300, 300, 3, 60, "Left click to start!","fonts//arial.ttf" );
-    Text deathScoreText(140, 80, 3, 60, "0", "fonts//arial.ttf");
-    Text deathHSText(140, 150, 3, 60, "0", "fonts//arial.ttf");
+    Text<int> gameOverText(140, 300, 3, 50, "Game Over! Press R for RESTART", "fonts//arial.ttf" );  //text
+    Text<int> startText(300, 300, 3, 60, "Left click to start!","fonts//arial.ttf" );
+    Text<int> deathScoreText(140, 80, 3, 60, "0", "fonts//arial.ttf");
+    Text<int> deathHSText(140, 150, 3, 60, "0", "fonts//arial.ttf");
 
     sf::SoundBuffer buffer_g_o;              //sunete
     buffer_g_o.loadFromFile("sounds//game_over.wav");
@@ -159,6 +159,7 @@ int main()
     delete _second;
     delete _third;
     delete factory;
+    delete _bird;
 
     return 0;
 }

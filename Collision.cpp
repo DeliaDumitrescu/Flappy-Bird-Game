@@ -2,7 +2,7 @@
 
 void Collision::isCollide()
 {
-	std::pair <int, int> coords = score.getNextCoords(first, second, third);
+	std::pair <float, float> coords = score.getNextCoords(first, second, third);
 
 	if(bird.hitsPipe(coords.first, coords.second) && bird.isAlive())
 	{
