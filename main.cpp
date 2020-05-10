@@ -152,6 +152,8 @@ int main()
         }
         window.display();
     }
+
+
     std::cout << "Let's look at " << bird->get_name() << "'s accomplishments: \n" << *score;
 
     delete _bird;
@@ -159,7 +161,6 @@ int main()
     delete _second;
     delete _third;
     delete factory;
-    delete _bird;
 
     return 0;
 }

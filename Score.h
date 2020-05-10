@@ -26,6 +26,7 @@ public:
     Score operator ++(int);
     friend std::ostream& operator <<(std::ostream&, Score&);
     std::pair <float, float> getNextCoords(Pipe&, Pipe&, Pipe&);
+    ~Score();
 };
 
 #endif // SCORE_H

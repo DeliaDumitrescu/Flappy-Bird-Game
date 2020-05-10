@@ -22,6 +22,8 @@ private:
 
     static Bird* instance;
     Bird();
+    Bird& operator =(const Bird&) = delete;
+    Bird(const Bird&) = delete;
 public:
     static Bird* GetInstance();
 

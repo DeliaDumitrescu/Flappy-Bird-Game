@@ -10,16 +10,8 @@ Bird* Bird::GetInstance()
     return instance;
 }
 
- Bird::Bird()
+ Bird::Bird(): Object(120, 500), name("Your bird"), alive(1), dy(0), angle(0), fileBird("images//bird.png"), fileSound("sounds//flap.wav")
  {
-    name = "Your Bird";
-    alive = 1;
-    x = 120;
-    y = 500;
-    dy = 0;
-    angle = 0;
-    fileBird = "images//bird.png";
-    fileSound = "sounds//flap.wav";
     manageExceptions();
  }
 
@@ -56,6 +48,7 @@ void Bird::reset()
     alive = 1;
     angle = 0;
 }
+
 
 Bird& Bird::operator ++(int)
 {

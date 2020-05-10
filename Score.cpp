@@ -3,9 +3,8 @@
 #include <filesystem>
 
 
-Score::Score(const Score& other)
+Score::Score(const Score& other): allScores(other.allScores), value(other.value)
 {
-    value = other.value;
     scoreText = other.scoreText;
 }
 
@@ -40,6 +39,12 @@ std::ostream& operator <<(std::ostream& out, Score& score)
     }
     out << "\nSee you next time, thanks for playing!\n";
     return out;
+}
+
+Score::~Score()
+{
+    while(!allScores.empty())
+        allScores.pop();
 }
 
 std::pair <float, float> Score::getNextCoords(Pipe& first, Pipe& second, Pipe& third)

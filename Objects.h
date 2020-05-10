@@ -8,6 +8,8 @@ class Object
 protected:
 	float x, y;
 public:
+    Object(float _x = 0, float _y = 0): x(_x), y(_y){}
+    Object(const Object& other): x(other.x), y(other.y){}
 	inline float getX() const { return x; }
 	inline float getY() const { return y; }
 	virtual void draw(sf::RenderWindow&) = 0;

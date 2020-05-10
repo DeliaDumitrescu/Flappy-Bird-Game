@@ -4,19 +4,13 @@
 
 float Pipe::reset_x = 600;
 
-Pipe::Pipe(float _x, std::string _file_up, std::string _file_down)
+Pipe::Pipe(float _x, std::string _file_up, std::string _file_down): Object(_x, rand() % 400 + 350), file_up(_file_up), file_down(_file_down)
 {
-    x = _x;
-    y = rand() % 400 + 350;
-    file_up = _file_up;
-    file_down = _file_down;
     manageExceptions();
 }
 
-Pipe::Pipe(const Pipe& other)
+Pipe::Pipe(const Pipe& other): Object(other)
 {
-    x = other.x;
-    y = other.y;
     file_up = other.file_up;
     file_down = other.file_down;
 
@@ -42,6 +36,7 @@ void Pipe::reset()
 
 Pipe& Pipe::operator =(const Pipe& other)
 {
+    //elegant ar fi sa apelam operatorul = de la object
     x = other.x;
     y = other.y;
     file_up = other.file_up;
@@ -49,6 +44,7 @@ Pipe& Pipe::operator =(const Pipe& other)
 
     manageExceptions();
     return *this;
+
 }
 
 Pipe Pipe::operator +(float val) const
