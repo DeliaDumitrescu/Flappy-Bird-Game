@@ -8,11 +8,6 @@ template <class T>
 Text<T>::Text(T _x, T _y, T _thickness, T _size, std::string _s, std::string _fileName): fileName(_fileName), x(_x), y(_y), thickness(_thickness), size(_size), s(_s)
 {
     manageExceptions();
-    t.setPosition(x, y);
-    t.setFont(f);
-    t.setOutlineThickness(thickness);
-    t.setCharacterSize(size);
-    t.setString(s);
 }
 
 template <class T>
@@ -25,6 +20,7 @@ void Text<T>::draw(sf::RenderWindow& w)
 template <class T>
 Text<T>& Text<T>::operator =(const Text& other)
 {
+    if (this == &other) return *this;
     fileName = other.fileName;
     x = other.x;
     y = other.y;
@@ -53,5 +49,10 @@ void Text<T>::manageExceptions()
     }
     catch (...) {
         f.loadFromFile(fileName);
+        t.setPosition(x, y);
+        t.setFont(f);
+        t.setOutlineThickness(thickness);
+        t.setCharacterSize(size);
+        t.setString(s);
     }
 }

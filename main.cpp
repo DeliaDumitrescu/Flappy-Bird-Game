@@ -78,8 +78,8 @@ int main()
     game_over_sound.setBuffer(buffer_g_o);
     bool g_o_sound_played = 0;
 
-    auto tooLow = [&]() {return bird->getY() > 700 && bird->isAlive();};
-    auto tooHigh = [&]() {return bird->getY() < -10 && bird->isAlive();};
+    auto tooLow = [&]() { return bird->getY() > 700 && bird->isAlive(); };
+    auto tooHigh = [&]() { return bird->getY() < -10 && bird->isAlive(); };
 
     while (window.isOpen())
     {
@@ -97,7 +97,7 @@ int main()
         window.draw(background);
         bird->draw(window);
 
-        for( auto pipe : { first, second, third } )
+        for(auto pipe : { first, second, third })
             pipe->draw(window);
 
         score->draw(window);
@@ -119,7 +119,7 @@ int main()
             if (event.type == sf::Event::KeyPressed)
                 if (event.key.code == sf::Keyboard::R)
                 {
-                   for( auto pipe : { first, second, third } )
+                   for(auto pipe : { first, second, third })
                         pipe->reset();
                     bird->reset();
                     started = 0;
@@ -132,7 +132,8 @@ int main()
         if(bird->isAlive())
         {
             if(started)
-            {   if (delay.getElapsedTime().asSeconds() > 0.005)
+            {   
+                if (delay.getElapsedTime().asSeconds() > 0.005)
                 {
                     (*bird)--;
                     delay.restart();

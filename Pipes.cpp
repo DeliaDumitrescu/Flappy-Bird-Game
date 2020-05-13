@@ -36,7 +36,7 @@ void Pipe::reset()
 
 Pipe& Pipe::operator =(const Pipe& other)
 {
-    //elegant ar fi sa apelam operatorul = de la object
+    if (this == &other) return *this;
     x = other.x;
     y = other.y;
     file_up = other.file_up;
@@ -93,12 +93,8 @@ void Pipe::manageExceptions()
 void Pipe::updatePosition()
 {
     if(x < -150)
-    {   x = 1350;
+    {   
+        x = 1350;
         y = rand() % 400 + 350;
     }
-}
-
-bool Pipe::passed()
-{
-    return x == 5;
 }

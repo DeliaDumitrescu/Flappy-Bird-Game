@@ -38,7 +38,6 @@ public:
     void draw(sf::RenderWindow&) override;
     Bird& operator ++(int);
     Bird& operator --(int);
-    //de adaugat ++ normal maybe
     friend std::istream& operator >>(std::istream&, Bird&);
     void manageExceptions();
 };

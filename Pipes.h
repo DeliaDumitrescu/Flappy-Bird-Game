@@ -21,7 +21,7 @@ public:
     void reset();
     void draw(sf::RenderWindow&) override;
     void updatePosition();
-    bool passed();
+    bool passed() { return x == 5; }
     Pipe& operator =(const Pipe&);
     Pipe operator +(float) const;
     Pipe operator -(float) const;
