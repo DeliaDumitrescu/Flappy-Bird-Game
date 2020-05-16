@@ -23,6 +23,7 @@ public:
     void updatePosition();
     bool passed() { return x == 5; }
     Pipe& operator =(const Pipe&);
+    Pipe& operator =(Pipe&&);
     Pipe operator +(float) const;
     Pipe operator -(float) const;
     void operator +=(float);

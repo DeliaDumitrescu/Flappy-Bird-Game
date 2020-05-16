@@ -46,6 +46,22 @@ Pipe& Pipe::operator =(const Pipe& other)
     return *this;
 
 }
+Pipe& Pipe::operator =(Pipe&& other)
+{
+    if (this == &other) return *this;
+    x = other.x;
+    y = other.y;
+    file_up = other.file_up;
+    file_down = other.file_down;
+
+    manageExceptions();
+
+    other.x = other.y = 0;
+    other.file_up = other.file_down = "";
+
+    return *this;
+
+}
 
 Pipe Pipe::operator +(float val) const
 {
