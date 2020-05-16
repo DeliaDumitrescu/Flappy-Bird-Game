@@ -5,9 +5,9 @@
 - [x] Graphical Interface (SDL, SFML, Qt, etc.) - C++ API 
 - [x] RTTI (Run-time type information)
 - [x] Abstract Classes
-- [x] Overloading Operators - << Logger class; += and -= Keyboard class; = and + Score class
+- [x] Overloading Operators
 - [x] Heap Memory Allocation
-- [ ] Exceptions
+- [x] Exceptions
 - [x] STL _(std::vector - for entities (doodler and platforms); std::map for keyboard input)_
 - [x] Lambda expressions
 - [x] Templates
