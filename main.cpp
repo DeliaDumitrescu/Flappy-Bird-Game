@@ -11,32 +11,6 @@
 
 int main()
 {
-    /*sqlite3* db;
-    int errDB;
-    const char* sql;
-    char* errMsg = 0;
-
-    errDB = sqlite3_open("flappy_bird.db", &db);
-    if (errDB) {
-        std::cout << "Can't open database: %s\n" << sqlite3_errmsg(db);
-        return 0;
-    }
-    else  std::cout << "Opened database successfully\n";
-
-    sql = "CREATE TABLE PLAY_HISTORY("  \
-            "ID             INT PRIMARY KEY     NOT NULL," \
-            "NAME           TEXT    NOT NULL," \
-            "HIGHSCORE      INT     NOT NULL );";
-
-    errDB = sqlite3_exec(db, sql, callback, 0, &errMsg);
-
-    if (errDB != SQLITE_OK) {
-        std::cout << errMsg << '\n';
-        sqlite3_free(errMsg);
-    }
-    else std::cout << "Table created successfully\n";
-
-    sqlite3_close(db);*/
     ObjectFactory* factory = new ObjectFactory;
 
     Object* _bird = factory->Create("bird");
@@ -132,7 +106,7 @@ int main()
         if(bird->isAlive())
         {
             if(started)
-            {   
+            {
                 if (delay.getElapsedTime().asSeconds() > 0.005)
                 {
                     (*bird)--;

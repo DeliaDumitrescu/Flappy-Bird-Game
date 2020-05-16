@@ -28,7 +28,7 @@ public:
     Pipe operator -(float) const;
     void operator +=(float);
     void operator -=(float);
-    void manageExceptions();
+    void manageExceptions() override;
 };
 
 #endif //PIPES_H

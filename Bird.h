@@ -22,8 +22,10 @@ private:
 
     static Bird* instance;
     Bird();
-    Bird& operator =(const Bird&) = delete;
     Bird(const Bird&) = delete;
+    Bird(Bird &&) noexcept = delete;
+    Bird& operator =(const Bird&) = delete;
+    Bird &operator=(Bird &&bird) = delete;
 public:
     static Bird* GetInstance();
 
@@ -39,7 +41,7 @@ public:
     Bird& operator ++(int);
     Bird& operator --(int);
     friend std::istream& operator >>(std::istream&, Bird&);
-    void manageExceptions();
+    void manageExceptions() override;
 };
 
 
